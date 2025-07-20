@@ -39,8 +39,6 @@ const sendOtp = async (email, otp) => {
 
     try {
         await transporter.sendMail(emailDetail);
-        console.log("OTP email sent successfully.");
-        console.log("Mail sent!");
     } catch (error) {
         console.error("Error sending OTP email:", error);
     }
