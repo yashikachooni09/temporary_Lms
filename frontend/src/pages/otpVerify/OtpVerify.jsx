@@ -46,7 +46,7 @@ export const OtpVerify = () => {
     }),
     onSubmit: async (values) => {
       try {
-        await axios.post('hhttp://localhost:3000/auth/verify-otp', {
+        await axios.post('http://localhost:3000/auth/verify-otp', {
           email,
           otp: values.otp,
         });

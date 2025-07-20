@@ -2,7 +2,9 @@ import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 
 
-import HomeImage from '../../assets/homeImage.png';
+// import BookShelf from '../../assets/bookShelf.png';
+import BooksTree from '../../assets/booksTree.png';
+
 import Ball from "../../assets/ball.png";
 
 import mcaIcon from '../../assets/eContent/mca.png';
@@ -37,7 +39,7 @@ export const Home = () => {
       <img className="home-ball" src={Ball} alt="Ball" />
 
       <div className="home-top-part">
-        <img ref={imageRef} className="home-image" src={HomeImage} alt='Home Image' />
+        <img ref={imageRef} className="home-image" src={BooksTree} alt='Home Image' />
         <section ref={heroRef} className="home-hero">
           <h1>Welcome to</h1>
           <h2>MAIMT Library</h2>

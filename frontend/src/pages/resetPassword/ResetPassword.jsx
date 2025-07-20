@@ -106,7 +106,7 @@ export const ResetPassword = ({ email }) => {
     >
       <Container className="bg-light shadow rounded p-4" style={{ maxWidth: '400px' }}>
         <Form noValidate onSubmit={formik.handleSubmit} className="fade show">
-          <h5 className="text-center mb-3">🔒 Step 3: Reset Password</h5>
+          <h5 className="text-center mb-3"><strong>Reset Password</strong></h5>
 
           {/* New Password */}
           <Form.Group className="mb-3 position-relative">
