@@ -46,7 +46,7 @@ export const OtpVerify = () => {
     }),
     onSubmit: async (values) => {
       try {
-        await axios.post('http://localhost:5000/api/request-otp/verify', {
+        await axios.post('http://localhost:3000/api/request-otp/verify', {
           email,
           otp: values.otp,
         });
@@ -83,7 +83,7 @@ export const OtpVerify = () => {
   const handleResendOtp = async () => {
     setResending(true);
     try {
-      await axios.post('http://localhost:5000/auth/verify-email', { email });
+      await axios.post('http://localhost:3000/auth/verify-email', { email });
       toast.success('OTP resent successfully!');
       setResendCooldown(30);
     } catch (err) {

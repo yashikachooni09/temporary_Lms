@@ -1,0 +1,75 @@
+.rules-page {
+  padding: 60px 111px;
+  margin: auto;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(90deg, #f0f4ff, #fffaf0, #eafff1);
+}
+
+.rules-title {
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: #03045e;
+  font-family: 'Cinzel', serif;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.rules-subtitle {
+  text-align: center;
+  font-size: 1.1rem;
+  margin-bottom: 40px;
+  color: #444;
+}
+
+.rules-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Rule Card */
+.rule-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(8px);
+  padding: 18px 20px;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.rule-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+.rule-icon {
+  font-size: 1.8rem;
+  color: #0077b6;
+  flex-shrink: 0;
+}
+
+.rule-text {
+  font-size: 1.05rem;
+  color: #222;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .rules-title {
+    font-size: 2.2rem;
+  }
+
+  .rule-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .rule-icon {
+    font-size: 1.4rem;
+  }
+}

@@ -6,6 +6,12 @@ import { AdminSignup } from './pages/adminDashboard/adminSignup/AdminSignup.jsx'
 import { StudentLogin } from './pages/studentLogin/StudentLogin.jsx';
 import { AdminLogin } from './pages/adminDashboard/adminLogin/AdminLogin.jsx';
 import { Home } from './pages/home/Home.jsx';
+import { About } from './pages/about/About.jsx';
+import { Rules } from './pages/rules/Rules.jsx';
+
+import { Books } from './pages/books/Books.jsx';
+import {BookDetail} from './pages/bookdetails/BookDetail.jsx';
+
 import { ContactUs } from './pages/contactUs/ContactUs.jsx'
 import { ForgotPassword } from './pages/forgotPassword/ForgotPassword.jsx';
 import { OtpVerify } from './pages/otpVerify/OtpVerify.jsx';
@@ -36,6 +42,12 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/rules" element={<Rules />} />
+
+          <Route path="/books" element={<Books />} />
+          <Route path="/book-details/:id" element={<BookDetail />} />
+
           <Route path="/student-login" element={<StudentLogin />} />
           <Route path='/admin-login' element={<AdminLogin />} />
           <Route path="/student-signup" element={<StudentSignUp />} />
