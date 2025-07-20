@@ -42,10 +42,10 @@ export const ForgotPassword = () => {
           autoClose: 2000,
           type: "success",
         });
-
+        localStorage.setItem("resetPassword", values.email);
         // Navigate to OTP verification page with email passed via state
         setTimeout(() => {
-          navigate("/verify-otp", { state: { email: values.email } });
+          navigate("/verify-otp");
         }, 3000);
       } catch (error) {
         toast.update(toastId, {
