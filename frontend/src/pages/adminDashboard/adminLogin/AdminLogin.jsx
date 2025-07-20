@@ -28,19 +28,26 @@ export const AdminLogin = () => {
       email: Yup.string().email('Invalid email address').required('Email is required'),
       password: Yup.string().min(6, 'Password must be at least 6 characters').required('Password is required'),
     }),
-    onSubmit: async (values, { setSubmitting, setErrors }) => {
-      try {
-        const response = await axios.post('http://localhost:5000/api/login', values);
-        toast.success(response.data.message);
-        navigate('/home');
-      } catch (error) {
-        if (error.response?.status === 401) {
-          setErrors({ password: 'Invalid email or password' });
-        } else {
-          alert('Server Error. Please try again later.');
+    onSubmit: async(values, { resetForm }) => {
+     try{
+      const res=await axios.post("http://localhost:3000/admin/login",values)
+      if(res.data.message){
+        localStorage.setItem("token",res.data.token)
+        localStorage.setItem("admin",JSON.stringify(res.data.admin))
+        toast.success(res.data.message)
+        resetForm()
+        navigate("/student-dashboard")
+      }
+     else {
+          toast.error(res.data.message || "Login failed!");
         }
-      } finally {
-        setSubmitting(false);
+
+      } catch (err) {
+        if (err.response?.data?.message) {
+          toast.error(err.response.data.message);
+        } else {
+          toast.error("Something went wrong during login!");
+        }
       }
     },
   });
@@ -59,7 +66,7 @@ export const AdminLogin = () => {
                 type="adminId"
                 name="adminId"
                 placeholder="Enter your id"
-                value={formik.values.id}
+                value={formik.values.adminId}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 isInvalid={formik.touched.adminId && !!formik.errors.adminId}

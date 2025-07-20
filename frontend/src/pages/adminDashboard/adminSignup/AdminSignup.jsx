@@ -5,7 +5,7 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-
+import axios from 'axios';
 import './adminSignup.css';
 
 const validationSchema = Yup.object().shape({
@@ -81,20 +81,29 @@ export const AdminSignup = () => {
             validationSchema={validationSchema}
             onSubmit={async (values, { resetForm }) => {
               try {
-                const response = await fetch('http://localhost:5000/api/admin/signup', {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify(values),
-                });
+                const res=await axios.post("http://localhost:3000/admin/signup",values)
+                if(res.data.success){
+                  localStorage.setItem("token",res.data.token)
+                  localStorage.setItem("admin",JSON.stringify(res.data.admin))
+                  toast.success(res.data.message)
+                   resetForm();
+                navigate('/admin-dashboard');
 
-                const data = await response.json();
-                toast.success(data.message || 'Admin registered successfully!');
-                resetForm();
-                navigate('/');
+                }else {
+                  toast.error(res.data.message || "Signup failed!");
+                }
               } catch (err) {
-                toast.error('Signup failed!');
-                console.error(err);
+
+                if (err.response && err.response.data && err.response.data.message) {
+                  toast.error(err.response.data.message);
+                } else {
+                  toast.error('Something went wrong during signup!');
+                }
+
+                console.error("Signup error:", err.response?.data || err.message);
               }
+               
+              
             }}
           >
             {({

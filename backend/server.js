@@ -4,6 +4,7 @@ const connectDb=require("./config/db")
 const dotenv=require("dotenv")
 const cors=require("cors")
 const authRoutes=require("./routes/authRoutes")
+const adminRoutes=require("./routes/adminRoutes")
 
 //load env var
 dotenv.config()
@@ -12,6 +13,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 connectDb()
 app.use("/auth",authRoutes)
+app.use("/admin",adminRoutes)
 const port=process.env.PORT||3000
 app.listen(port,()=>{
     console.log(`Server running on http://localhost:${port}`)
