@@ -156,3 +156,35 @@
 .main-navbar-login-btn:active {
   transform: scale(0.93);
 }
+
+
+
+
+
+
+
+
+
+
+
+.main-navbar-user-info {
+  padding: 8px 12px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+  margin-bottom: 8px;
+}
+
+.main-navbar-user-name {
+  font-weight: 700;
+  font-size: 1rem;
+  color: #03045E; /* Dark blue */
+  margin-bottom: 4px;
+  user-select: none;
+}
+
+.main-navbar-user-role {
+  font-size: 0.85rem;
+  color: #666666;
+  font-style: italic;
+  user-select: none;
+}
