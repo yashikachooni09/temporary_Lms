@@ -1,103 +1,195 @@
-import { Container, Form, Button } from "react-bootstrap";
-import { useFormik } from "formik";
-import * as yup from "yup";
-import axios from "axios";
-import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import { Container, Form, Button, Spinner, ProgressBar } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import axios from 'axios';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { toast } from 'react-toastify';
 
-export const ResetPassword = () => {
+export const ResetPassword = ({ email }) => {
   const navigate = useNavigate();
+  const [showNewPass, setShowNewPass] = useState(false);
+  const [showConfirmPass, setShowConfirmPass] = useState(false);
+  const [resetLoading, setResetLoading] = useState(false);
+  const [passwordStrength, setPasswordStrength] = useState('');
+
+  const getPasswordStrength = (password) => {
+    let score = 0;
+    if (password.length >= 6) score++;
+    if (/[A-Z]/.test(password)) score++;
+    if (/\d/.test(password)) score++;
+    if (/[@$!%*?&#]/.test(password)) score++;
+
+    if (score <= 1) return 'Weak';
+    if (score === 2 || score === 3) return 'Medium';
+    return 'Strong';
+  };
+
+  const renderStrengthBar = () => {
+    let variant = 'danger';
+    let now = 33;
+    if (passwordStrength === 'Medium') {
+      variant = 'warning';
+      now = 66;
+    } else if (passwordStrength === 'Strong') {
+      variant = 'success';
+      now = 100;
+    }
+    return (
+      <div className="mt-2">
+        <ProgressBar
+          now={now}
+          variant={variant}
+          className="mb-2"
+          animated
+          label={passwordStrength}
+        />
+      </div>
+    );
+  };
+
   const formik = useFormik({
     initialValues: {
-      newPassword: "",
-      confirmPassword: ""
+      newPassword: '',
+      confirmPassword: '',
     },
-    validationSchema: yup.object({
-      newPassword: yup
-        .string()
-        .required("Required")
+    validationSchema: Yup.object({
+      newPassword: Yup.string()
+        .required('Required')
         .matches(
           /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{6,}$/,
-          "Weak password"
+          'Weak password'
         ),
-      confirmPassword: yup
-        .string()
-        .required("Required")
-        .oneOf([yup.ref("newPassword")], "Password mismatch")
+      confirmPassword: Yup.string()
+        .required('Required')
+        .oneOf([Yup.ref('newPassword')], 'Passwords must match'),
     }),
     onSubmit: async (values) => {
+      setResetLoading(true);
       try {
-        const response = await axios.post("http://localhost:3000/auth/reset-password", {
-  email: localStorage.getItem("resetEmail"),
-   newPassword: values.newPassword
+        const res = await axios.post('http://localhost:3000/auth/reset-password', {
+          email,
+          newPassword: values.newPassword,
         });
 
-        toast.success(response.data.message);
-        localStorage.removeItem("resetEmail");
-        setTimeout(()=>
-        { 
-        navigate("/login");
-        },2000)
-      } catch (e) {
-        toast.error(e.response?.data?.message || "Something went wrong");
+        toast.success(res.data.message || 'Password reset successfully!');
+        setTimeout(() => {
+          setResetLoading(false);
+          navigate('/login');
+        }, 2000);
+      } catch (err) {
+        setResetLoading(false);
+        const msg = err.response?.data?.message;
+        if (msg === 'New password cannot be same as old password') {
+          toast.error('You are using your old password. Please enter a new one.');
+        } else {
+          toast.error(msg || 'Reset failed. Try again.');
+        }
       }
-    }
+    },
   });
 
+  useEffect(() => {
+    setPasswordStrength(getPasswordStrength(formik.values.newPassword));
+  }, [formik.values.newPassword]);
+
   return (
-    <Container
-      className="bg-light shadow rounded mt-5 p-4"
-      style={{ width: "400px" }}
+    <div
+      style={{
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        background: '#f8f9fa',
+      }}
     >
-      <h3 className="mb-4" style={{ color: "#5f6fff", textAlign: "center" }}>
-        Reset Password
-      </h3>
+      <Container className="bg-light shadow rounded p-4" style={{ maxWidth: '400px' }}>
+        <Form noValidate onSubmit={formik.handleSubmit} className="fade show">
+          <h5 className="text-center mb-3">🔒 Step 3: Reset Password</h5>
 
-      <Form onSubmit={formik.handleSubmit}>
-        <Form.Group>
-          <Form.Label>New Password</Form.Label>
-          <Form.Control
-            type="password"
-            name="newPassword"
-            placeholder="Enter new password"
-            value={formik.values.newPassword}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            isInvalid={formik.touched.newPassword && formik.errors.newPassword}
-          />
-          <Form.Control.Feedback type="invalid">
-            {formik.errors.newPassword}
-          </Form.Control.Feedback>
-        </Form.Group>
+          {/* New Password */}
+          <Form.Group className="mb-3 position-relative">
+            <Form.Label>New Password</Form.Label>
+            <Form.Control
+              type={showNewPass ? 'text' : 'password'}
+              name="newPassword"
+              value={formik.values.newPassword}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              isInvalid={formik.touched.newPassword && !!formik.errors.newPassword}
+            />
+            {formik.values.newPassword && (
+              <>
+                <span
+                  className="password-toggle-icon"
+                  onClick={() => setShowNewPass(!showNewPass)}
+                  style={{
+                    position: 'absolute',
+                    top: '38px',
+                    right: '12px',
+                    cursor: 'pointer',
+                  }}
+                >
+                  {showNewPass ? <FaEyeSlash /> : <FaEye />}
+                </span>
+                {renderStrengthBar()}
+              </>
+            )}
+            <Form.Control.Feedback type="invalid">
+              {formik.errors.newPassword}
+            </Form.Control.Feedback>
+          </Form.Group>
 
-        <Form.Group>
-          <Form.Label className="ml-1 mt-3">Confirm Password</Form.Label>
-          <Form.Control
-            type="password"
-            name="confirmPassword"
-            placeholder="Re-enter password"
-            value={formik.values.confirmPassword}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            isInvalid={
-              formik.touched.confirmPassword && formik.errors.confirmPassword
-            }
-          />
-          <Form.Control.Feedback type="invalid">
-            {formik.errors.confirmPassword}
-          </Form.Control.Feedback>
-        </Form.Group>
+          {/* Confirm Password */}
+          <Form.Group className="mb-3 position-relative">
+            <Form.Label>Confirm Password</Form.Label>
+            <Form.Control
+              type={showConfirmPass ? 'text' : 'password'}
+              name="confirmPassword"
+              value={formik.values.confirmPassword}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              isInvalid={
+                formik.touched.confirmPassword && !!formik.errors.confirmPassword
+              }
+            />
+            {formik.values.confirmPassword && (
+              <span
+                className="password-toggle-icon"
+                onClick={() => setShowConfirmPass(!showConfirmPass)}
+                style={{
+                  position: 'absolute',
+                  top: '38px',
+                  right: '12px',
+                  cursor: 'pointer',
+                }}
+              >
+                {showConfirmPass ? <FaEyeSlash /> : <FaEye />}
+              </span>
+            )}
+            <Form.Control.Feedback type="invalid">
+              {formik.errors.confirmPassword}
+            </Form.Control.Feedback>
+          </Form.Group>
 
-        <div className="text-center mt-3">
+          {/* Submit Button */}
           <Button
             type="submit"
-            className="mt-4 px-3 w-50 text-center d-block mx-auto"
-            style={{ backgroundColor: "#5f6fff" }}
+            className="w-100 login-btn"
+            disabled={resetLoading}
           >
-            Update Password
+            {resetLoading ? (
+              <>
+                <Spinner animation="border" size="sm" className="me-2" />
+                Resetting Password...
+              </>
+            ) : (
+              'Reset Password'
+            )}
           </Button>
-        </div>
-      </Form>
-    </Container>
+        </Form>
+      </Container>
+    </div>
   );
 };

@@ -116,7 +116,7 @@ export const AdminLogin = () => {
           </Form>
 
           <div className="text-center mt-3 small">
-            Don't have an account? <Link to="/signup" className="signup-link">Sign up</Link>
+            Don't have an account? <Link to="/admin-signup" className="signup-link">Sign up</Link>
           </div>
         </Card>
       </Container>

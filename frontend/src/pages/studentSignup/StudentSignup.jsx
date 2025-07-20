@@ -114,35 +114,35 @@ export const StudentSignUp = () => {
               confirmPassword: '',
             }}
             validationSchema={validationSchema}
-           onSubmit={async (values, { resetForm }) => {
-  try {
-    //new 
-    const res = await axios.post("http://localhost:3000/auth/signup", values);
+            onSubmit={async (values, { resetForm }) => {
+              try {
+                //new 
+                const res = await axios.post("http://localhost:3000/auth/signup", values);
 
-   
-    console.log("Response from server:", res.data);
 
-    if (res.data.success) {
-      localStorage.setItem("token", res.data.token);
-      localStorage.setItem("user", JSON.stringify(res.data.user));
+                console.log("Response from server:", res.data);
 
-      toast.success(res.data.message); 
-       navigate("/student-page"); 
-      return;
-    } else {
-      toast.error(res.data.message || "Signup failed!");
-    }
-  } catch (err) {
-   
-    if (err.response && err.response.data && err.response.data.message) {
-      toast.error(err.response.data.message);
-    } else {
-      toast.error('Something went wrong during signup!');
-    }
+                if (res.data.success) {
+                  localStorage.setItem("token", res.data.token);
+                  localStorage.setItem("user", JSON.stringify(res.data.user));
 
-    console.error("Signup error:", err.response?.data || err.message);
-  }
-}}
+                  toast.success(res.data.message);
+                  navigate("/student-page");
+                  return;
+                } else {
+                  toast.error(res.data.message || "Signup failed!");
+                }
+              } catch (err) {
+
+                if (err.response && err.response.data && err.response.data.message) {
+                  toast.error(err.response.data.message);
+                } else {
+                  toast.error('Something went wrong during signup!');
+                }
+
+                console.error("Signup error:", err.response?.data || err.message);
+              }
+            }}
 
           >
             {({
