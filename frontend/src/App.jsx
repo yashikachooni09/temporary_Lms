@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
-import { SignUp } from './pages/signUp/SignUp.jsx';
+import { StudentSignUp } from './pages/studentSignUp/StudentSignUp.jsx';
 import { AdminSignup } from './pages/adminDashboard/adminSignup/AdminSignup.jsx';
-import { Login } from './pages/login/Login.jsx';
+import { StudentLogin } from './pages/studentLogin/StudentLogin.jsx';
 import { AdminLogin } from './pages/adminDashboard/adminLogin/AdminLogin.jsx';
 import { Home } from './pages/home/Home.jsx';
 import { ContactUs } from './pages/contactUs/ContactUs.jsx'
@@ -36,9 +36,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/student-login" element={<StudentLogin />} />
           <Route path='/admin-login' element={<AdminLogin />} />
-          <Route path="/signup" element={<SignUp />} />
+          <Route path="/student-signup" element={<StudentSignUp />} />
           <Route path='/admin-signup' element={<AdminSignup />} />
           <Route path="/add-books" element={<AddBooks />} />
           <Route path="/contact-us" element={<ContactUs />} />

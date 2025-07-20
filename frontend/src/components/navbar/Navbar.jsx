@@ -13,7 +13,7 @@ export const Navbar = () => {
     const handleLogin = () => {
         setIsLoggedIn(true);
         setShowDropdown(false);
-        navigate('/login');
+        navigate('/student-login');
     };
 
     const handleLogout = () => {

@@ -9,7 +9,7 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import axios from "axios"
 
 
-import './signup.css';
+import './studentSignup.css';
 
 const validationSchema = Yup.object().shape({
   userName: Yup.string()
@@ -57,7 +57,7 @@ const validationSchema = Yup.object().shape({
 
 const courses = ['BCA', 'BBA', 'MCA', 'MBA', 'BCA CTIS', 'BCA AI'];
 
-export const SignUp = () => {
+export const StudentSignUp = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -385,7 +385,7 @@ export const SignUp = () => {
 
           <div className="text-center mt-3 small">
             Already have an account?{' '}
-            <Link to="/" className="login-link">Login</Link>
+            <Link to="/student-login" className="login-link">Login</Link>
           </div>
         </Card>
       </Container>

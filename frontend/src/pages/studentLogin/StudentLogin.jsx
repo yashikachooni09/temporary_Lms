@@ -10,9 +10,9 @@ import * as Yup from 'yup';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 
-import './login.css';
+import './studentLogin.css';
 
-export const Login = () => {
+export const StudentLogin = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
@@ -71,7 +71,7 @@ export const Login = () => {
           <Form noValidate className="mt-3" onSubmit={formik.handleSubmit}>
 
             <Form.Group className="mb-3">
-              <Form.Label>Admin/Student Id</Form.Label>
+              <Form.Label>Student Id</Form.Label>
               <Form.Control
                 type="text"
                 name="id"
@@ -133,7 +133,7 @@ export const Login = () => {
           </Form>
 
           <div className="text-center mt-3 small">
-            Don't have an account? <Link to="/signup" className="signup-link">Sign up</Link>
+            Don't have an account? <Link to="/student-signup" className="signup-link">Sign up</Link>
           </div>
         </Card>
       </Container>
