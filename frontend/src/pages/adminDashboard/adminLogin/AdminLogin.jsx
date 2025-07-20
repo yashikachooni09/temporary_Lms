@@ -36,7 +36,7 @@ export const AdminLogin = () => {
         localStorage.setItem("admin",JSON.stringify(res.data.admin))
         toast.success(res.data.message)
         resetForm()
-        navigate("/student-dashboard")
+        navigate("/admin-dashboard")
       }
      else {
           toast.error(res.data.message || "Login failed!");
