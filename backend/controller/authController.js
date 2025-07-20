@@ -1,41 +1,45 @@
-const User=require("../model/User")
-const bcrypt=require("bcrypt")
-const generateToken=require("../utils/generateToken")
+const User = require("../model/User")
+const bcrypt = require("bcrypt")
+const generateToken = require("../utils/generateToken")
 const Otp = require("../model/Otp");
 const sendOtp = require("../utils/sendMail");
 
 //signup
 
-exports.signup = async(req,res)=>{
-    const {userName,fatherName,email,address,batch,course,semester,rollNumber,number,password}=req.body
-    try{
-        const firstName=userName.trim().split(" ")[0].toLowerCase()
-        const customId=`${rollNumber}.${firstName}`
-        const exist=await User.findById(customId)
-        if(exist){
-            return res.status(400).json({message:"User already exist",success:false})
-        }
-        const hashPassword=await bcrypt.hash(password,10)
-        const user=new User({_id:customId,userName,fatherName,email,address,batch,course,semester,rollNumber,number,password:hashPassword})
-        await user.save()
-        res.status(201).json({message:"Signup successful",token:generateToken(user),user:{ id: user._id,
-    userName: user.userName,
-    email: user.email,
-    course: user.course,
-    semester: user.semester,
-    role: user.role},success:true})
+exports.signup = async (req, res) => {
+  const { userName, fatherName, email, address, batch, course, semester, rollNumber, number, password } = req.body
+  try {
+    const firstName = userName.trim().split(" ")[0].toLowerCase()
+    const customId = `${rollNumber}.${firstName}`
+    const exist = await User.findById(customId)
+    if (exist) {
+      return res.status(400).json({ message: "User already exist", success: false })
     }
-    catch(err){
-        if(err.code==11000){
-            const duplicateField=Object.keys(err.keyPattern)[0];
-             return res.status(400).json({
+    const hashPassword = await bcrypt.hash(password, 10)
+    const user = new User({ _id: customId, userName, fatherName, email, address, batch, course, semester, rollNumber, number, password: hashPassword })
+    await user.save()
+    res.status(201).json({
+      message: "Signup successful", token: generateToken(user), user: {
+        id: user._id,
+        userName: user.userName,
+        email: user.email,
+        course: user.course,
+        semester: user.semester,
+        role: user.role
+      }, success: true
+    })
+  }
+  catch (err) {
+    if (err.code == 11000) {
+      const duplicateField = Object.keys(err.keyPattern)[0];
+      return res.status(400).json({
         message: `User already exists with this ${duplicateField}`,
         success: false
       });
-        }
-         res.status(500).json({ message: "Server error",  error: err.message,success:false });
     }
-   
+    res.status(500).json({ message: "Server error", error: err.message, success: false });
+  }
+
 }
 
 //login
@@ -121,33 +125,29 @@ exports.login = async (req, res) => {
 };
 
 //verify email
-exports.verifyEmail = async(req,res)=>
-{
-  try{
-const {email} = req.body;
-const exist = await User.findOne({email});
-if(!exist)
-{
-  return res.status(404).json({message:"User not found"});
-}
-const otp = Math.floor(100000 + Math.random()*900000).toString();
-await  new Otp({email , otp , createdAt: new Date() }).save();
-await sendOtp(email , otp);
-return res.status(200).json({message:"Otp send to mail"})
-}
-  catch(error)
-  {
- console.error(error.message);
- res.status(500).json({ message: "Failed to send OTP" , error: error.message,});
+exports.verifyEmail = async (req, res) => {
+  try {
+    const { email } = req.body;
+    const exist = await User.findOne({ email });
+    if (!exist) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    await new Otp({ email, otp, createdAt: new Date() }).save();
+    await sendOtp(email, otp);
+    return res.status(200).json({ message: "Otp send to mail" })
+  }
+  catch (error) {
+    console.error(error.message);
+    res.status(500).json({ message: "Failed to send OTP", error: error.message, });
 
   }
 }
 
 //verify otp
 
-exports.verifyOtp = async(req,res)=>
-{
-   try {
+exports.verifyOtp = async (req, res) => {
+  try {
     const { email, otp } = req.body;
     const validOtp = await Otp.findOne({ email }).sort({ createdAt: -1 });
     if (!validOtp) {
@@ -161,24 +161,21 @@ exports.verifyOtp = async(req,res)=>
     res.status(200).json({ message: "OTP verified successfully" });
   } catch (error) {
     console.error("OTP verify error:", error);
-    res.status(500).json({ message: "Error verifying OTP" , error: error.message});
+    res.status(500).json({ message: "Error verifying OTP", error: error.message });
   }
 }
 
 //Reset password
 
-exports.resetPassword = async(req,res)=>
-{
- try
-  {
-  const {email , newPassword} = req.body;
-  const hashPassword = await bcrypt.hash(newPassword,10);
-const updated = await User.findOneAndUpdate({ email }, { password: hashPassword });
-if (!updated) return res.status(404).json({ message: "User not found" });
-  res.status(200).json({ message: "Password reset successful" });
+exports.resetPassword = async (req, res) => {
+  try {
+    const { email, newPassword } = req.body;
+    const hashPassword = await bcrypt.hash(newPassword, 10);
+    const updated = await User.findOneAndUpdate({ email }, { password: hashPassword });
+    if (!updated) return res.status(404).json({ message: "User not found" });
+    res.status(200).json({ message: "Password reset successful" });
   }
-  catch(error)
-  {
+  catch (error) {
     res.status(500).json({ message: "Failed to reset password" });
   }
 

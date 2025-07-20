@@ -45,7 +45,7 @@ export const StudentLogin = () => {
           if (user.role === "admin") {
             navigate("/admin-dashboard");
           } else {
-            navigate("/student-page");
+            navigate("/student-dashboard");
           }
 
         } else {

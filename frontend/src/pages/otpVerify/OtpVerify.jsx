@@ -2,12 +2,14 @@ import { useState, useEffect, useRef } from 'react';
 import { Container, Form, Button, Row, Col, Alert, Spinner, Card } from 'react-bootstrap';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { FaKey, FaSyncAlt } from 'react-icons/fa';
 
-export const OtpVerify = ({ email: passedEmail }) => {
+export const OtpVerify = () => {
+  const location = useLocation();
+  const passedEmail = location.state?.email || '';
   const [otpDigits, setOtpDigits] = useState(['', '', '', '', '', '']);
   const [verified, setVerified] = useState(false);
   const [resendCooldown, setResendCooldown] = useState(0);
@@ -20,9 +22,10 @@ export const OtpVerify = ({ email: passedEmail }) => {
     if (passedEmail) {
       setEmail(passedEmail);
     } else {
-      setEmail('demo@example.com'); // fallback for testing
+      toast.error('No email provided. Please restart the process.');
+      navigate('/forgot-password');
     }
-  }, [passedEmail]);
+  }, [passedEmail, navigate]);
 
   useEffect(() => {
     let timer;
@@ -80,10 +83,11 @@ export const OtpVerify = ({ email: passedEmail }) => {
   const handleResendOtp = async () => {
     setResending(true);
     try {
-      await axios.post('http://localhost:5000/api/request-otp', { email });
+      await axios.post('http://localhost:5000/auth/verify-email', { email });
       toast.success('OTP resent successfully!');
       setResendCooldown(30);
     } catch (err) {
+      console.log('Resend OTP Error:', err); 
       toast.error(err.response?.data?.message || 'Failed to resend OTP');
     } finally {
       setResending(false);
@@ -100,7 +104,7 @@ export const OtpVerify = ({ email: passedEmail }) => {
   }
 
   if (verified) {
-    navigate('/reset-password');
+    navigate('/reset-password', { state: { email } });
     return null;
   }
 

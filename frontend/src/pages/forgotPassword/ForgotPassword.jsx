@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import axios from "axios";
@@ -9,14 +9,6 @@ import { Container, Form, Button, Card, Spinner } from "react-bootstrap";
 export const ForgotPassword = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    const storedEmail = localStorage.getItem("resetEmail");
-    if (storedEmail) {
-      formik.setFieldValue("email", storedEmail);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const formik = useFormik({
     initialValues: {
@@ -51,10 +43,9 @@ export const ForgotPassword = () => {
           type: "success",
         });
 
-        localStorage.setItem("resetEmail", values.email);
-
+        // Navigate to OTP verification page with email passed via state
         setTimeout(() => {
-          navigate("/verify-otp");
+          navigate("/verify-otp", { state: { email: values.email } });
         }, 3000);
       } catch (error) {
         toast.update(toastId, {

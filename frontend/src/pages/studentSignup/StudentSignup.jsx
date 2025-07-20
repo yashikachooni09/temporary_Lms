@@ -127,7 +127,7 @@ export const StudentSignUp = () => {
                   localStorage.setItem("user", JSON.stringify(res.data.user));
 
                   toast.success(res.data.message);
-                  navigate("/student-page");
+                  navigate("/student-dashboard");
                   return;
                 } else {
                   toast.error(res.data.message || "Signup failed!");
