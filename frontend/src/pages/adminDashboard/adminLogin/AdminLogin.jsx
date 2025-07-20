@@ -56,7 +56,7 @@ export const AdminLogin = () => {
     <div className="login-screen">
       <Container>
         <Card className="p-4 login-container">
-          <h5 className="text-center fw-bold mb-4 login-heading">LOG IN</h5>
+          <h5 className="text-center fw-bold mb-4 login-heading">ADMIN LOGIN</h5>
 
           <Form noValidate className="mt-3" onSubmit={formik.handleSubmit}>
 
@@ -121,10 +121,6 @@ export const AdminLogin = () => {
 
             <Button type="submit" className="w-100 login-btn mt-3">LOG IN</Button>
           </Form>
-
-          <div className="text-center mt-3 small">
-            Don't have an account? <Link to="/admin-signup" className="signup-link">Sign up</Link>
-          </div>
         </Card>
       </Container>
     </div>
