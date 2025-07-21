@@ -1,4 +1,3 @@
-import React from "react";
 import "./rules.css";
 import {
   FaBookDead,
@@ -10,6 +9,8 @@ import {
   FaChair,
   FaClock,
 } from "react-icons/fa";
+
+import { Navbar } from '../../components/navbar/Navbar';
 
 export const Rules = () => {
   const rules = [
@@ -48,6 +49,8 @@ export const Rules = () => {
   ];
 
   return (
+    <>
+    <Navbar />
     <div className="rules-page">
       <h1 className="rules-title">📜 Library Rules & Regulations</h1>
       <p className="rules-subtitle">
@@ -63,5 +66,6 @@ export const Rules = () => {
         ))}
       </div>
     </div>
+    </>
   );
 };

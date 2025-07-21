@@ -62,3 +62,8 @@
 .signup-link:hover{
   color: #fca311 !important;
 }
+
+
+.Toastify__toast-container {
+  z-index: 10000 !important;
+}

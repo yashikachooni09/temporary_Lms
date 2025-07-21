@@ -52,8 +52,7 @@
 }
 
 .maimt-img:hover {
-  transform: scale(1.08) rotateZ(0.5deg);
-  box-shadow: 0 12px 12px rgba(0, 0, 0, 0.3);
+  transform: scale(1.08) rotateZ(6deg);
   transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 

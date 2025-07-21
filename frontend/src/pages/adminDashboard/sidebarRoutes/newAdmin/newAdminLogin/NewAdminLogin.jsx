@@ -10,13 +10,10 @@ import * as Yup from 'yup';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 
-import { Navbar } from '../../../components/navbar/Navbar';
+import {AdminSidebar} from '../../AdminSidebar';
 
-
-import './adminLogin.css';
-
-export const AdminLogin = () => {
-  const navigate = useNavigate();
+export const NewAdminLogin = () => {
+    const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
   const formik = useFormik({
@@ -55,11 +52,14 @@ export const AdminLogin = () => {
     },
   });
 
+  
   return (
     <>
-    <Navbar />
-    <div className="login-screen">
-      <Container>
+    <div className="admin-dashboard">
+      <AdminSidebar />
+
+      <div className="admin-main-content shrink">
+        <Container>
         <Card className="p-4 login-container">
           <h5 className="text-center fw-bold mb-4 login-heading">ADMIN LOGIN</h5>
 
@@ -126,8 +126,13 @@ export const AdminLogin = () => {
 
             <Button type="submit" className="w-100 login-btn mt-3">LOG IN</Button>
           </Form>
+
+          <div className="text-center mt-3 small">
+              Don't have an account? <Link to="/new-admin" className="signup-link">Sign up</Link>
+            </div>
         </Card>
       </Container>
+      </div>
     </div>
     </>
   );

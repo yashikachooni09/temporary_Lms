@@ -16,22 +16,17 @@
 .home-image {
   position: absolute;
   right: 60px;
-  /* height: 400px; */
   height: 444px;
-  /* width: 400px; */
   width: 444px;
-  opacity: 0;
-  transform: scale(0.7);
+  /* opacity: 0; */
+  /* transform: scale(0.7); */
   transition: all 0.9s ease-in-out;
-  /* transform: translateY(60px);
-  transition: opacity 0.9s ease-out, transform 0.9s ease-out; */
 }
 
-.home-image.animate {
+/* .home-image.animate {
   opacity: 1;
   transform: scale(1);
-  /* transform: translateY(0); */
-}
+} */
   
 
 .home-ball {

@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
 import { StudentSignUp } from './pages/studentSignUp/StudentSignUp.jsx';
-import { AdminSignup } from './pages/adminDashboard/adminSignup/AdminSignup.jsx';
 import { StudentLogin } from './pages/studentLogin/StudentLogin.jsx';
 import { AdminLogin } from './pages/adminDashboard/adminLogin/AdminLogin.jsx';
 import { Home } from './pages/home/Home.jsx';
@@ -18,7 +17,15 @@ import { OtpVerify } from './pages/otpVerify/OtpVerify.jsx';
 import { ResetPassword } from './pages/resetPassword/ResetPassword.jsx';
 import { NotFound } from './pages/notFound/NotFound.jsx';
 
-import { AdminDashboard } from './pages/adminDashboard/AdminDashboard.jsx';
+import { AdminDashboard } from './pages/adminDashboard/adminDashboard.jsx';
+import { NewAdmin } from './pages/adminDashboard/sidebarRoutes/newAdmin/NewAdmin.jsx';
+import { NewAdminLogin } from './pages/adminDashboard/sidebarRoutes/newAdmin/newAdminLogin/NewAdminLogin.jsx';
+import { ManageUsers } from './pages/adminDashboard/sidebarRoutes/manageUsers/ManageUsers.jsx';
+import { ManageBooks } from './pages/adminDashboard/sidebarRoutes/manageBooks/ManageBooks.jsx';
+import { Reports } from './pages/adminDashboard/sidebarRoutes/reports/Reports.jsx';
+import { AdminLogout } from './pages/adminDashboard/sidebarRoutes/adminLogout/AdminLogout.jsx';
+
+
 import { AddBooks } from './pages/adminDashboard/addBooks/AddBooks.jsx';
 
 
@@ -26,7 +33,6 @@ import { StudentDashboard } from './pages/studentDashboard/StudentDashboard.jsx'
 
 
 import { Header } from './components/header/Header.jsx';
-import { Navbar } from './components/navbar/Navbar.jsx';
 import { Footer } from './components/footer/Footer.jsx';
 import { ScrollToTop } from './components/scrollToTop/ScrollToTop.jsx';
 
@@ -38,7 +44,6 @@ function App() {
       <ToastContainer autoClose={3000} />
       <Router>
         <Header />
-        <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
@@ -51,7 +56,6 @@ function App() {
           <Route path="/student-login" element={<StudentLogin />} />
           <Route path='/admin-login' element={<AdminLogin />} />
           <Route path="/student-signup" element={<StudentSignUp />} />
-          <Route path='/admin-signup' element={<AdminSignup />} />
           <Route path="/add-books" element={<AddBooks />} />
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -60,6 +64,12 @@ function App() {
 
 
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
+          <Route path="/new-admin" element={<NewAdmin />} />
+          <Route path="/new-admin-login" element={<NewAdminLogin />} />
+          <Route path="/manage-users" element={<ManageUsers />} />
+          <Route path="/manage-books" element={<ManageBooks />} />
+          <Route path="/reports" element={<Reports />} />
+          <Route path="/admin-logout" element={<AdminLogout />} />
 
           <Route path="/student-dashboard" element={<StudentDashboard />} />
 

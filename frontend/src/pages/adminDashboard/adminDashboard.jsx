@@ -1,54 +1,50 @@
-import { useState } from 'react';
-import { Container, Card, Button } from 'react-bootstrap';
-import { FaBars, FaTimes, FaUserPlus, FaBook, FaChartBar, FaUserCog, FaSignOutAlt, FaHome, FaVideo } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+
+import { AdminSidebar } from './sidebarRoutes/AdminSidebar';
 
 import './adminDashboard.css';
 
 export const AdminDashboard = () => {
-  const [sidebarOpen, setSidebarOpen] = useState(true);
-  const navigate = useNavigate();
 
-  const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
+  const [showWelcome, setShowWelcome] = useState(false);
 
-  const handleNavigation = (path) => {
-    navigate(path);
-  };
+  useEffect(() => {
+    const justLoggedIn = sessionStorage.getItem("showWelcome");
+    if (justLoggedIn === "true") {
+      setShowWelcome(true);
+      sessionStorage.removeItem("showWelcome");
+    }
+  }, []);
+
 
   return (
-    <div className="admin-dashboard">
-      {/* Sidebar */}
-      <div className={`sidebar ${sidebarOpen ? 'open' : 'collapsed'}`}>
-        <Button variant="link" onClick={toggleSidebar} className="toggle-btn">
-          {sidebarOpen ? <FaTimes /> : <FaBars />}
-        </Button>
-        <div className="sidebar-header">
-          <h5 className="mb-0">Admin Panel</h5>
-        </div>
-        <ul className="sidebar-menu">
-          <li onClick={() => handleNavigation('/admin-dashboard')}>
-            <FaHome /> <span>Dashboard</span>
-          </li>
-          <li onClick={() => handleNavigation('/admin-signup')}>
-            <FaUserPlus /> <span>Add Admin</span>
-          </li>
-          <li><FaUserCog /> <span>Manage Users</span></li>
-          <li><FaBook /> <span>Manage Books</span></li>
-          <li><FaVideo /> <span>E-Content</span></li>
-          <li><FaChartBar /> <span>Reports</span></li>
-          <li><FaSignOutAlt /> <span>Logout</span></li>
-        </ul>
-      </div>
+    <>
+      <div className="admin-dashboard">
+        <AdminSidebar />
 
-      {/* Main Content */}
-      <div className={`main-content ${sidebarOpen ? 'shrink' : 'expand'}`}>
-        <Container className="d-flex justify-content-center align-items-center" style={{ minHeight: '80vh' }}>
-          <Card className="p-4 shadow" style={{ maxWidth: '500px', width: '100%', textAlign: 'center' }}>
+        <div className="admin-main-content shrink">
+          <div className="admin-content-card">
             <h4>🛠️ Welcome to Admin Dashboard!</h4>
-            <p className="text-muted mt-2">You're now in the admin dashboard.</p>
-          </Card>
-        </Container>
-      </div>
-    </div>
+            <p className="admin-text-muted">You're now in the admin dashboard.</p>
+          </div>
+        </div>
+      </div >
+
+      {showWelcome && (
+        <div className="welcome-overlay">
+          <div className="welcome-popup">
+            <h2>👋 Welcome to Admin Panel</h2>
+            <p>
+              You now have full control to manage books, users, and monitor library activity.
+              Use the sidebar to navigate between sections.
+            </p>
+            <button className="thanks-btn" onClick={() => setShowWelcome(false)}>
+              Thank You
+            </button>
+          </div>
+        </div>
+      )
+      }
+    </>
   );
 };

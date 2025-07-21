@@ -5,6 +5,10 @@ import emailjs from "emailjs-com";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { FaAngleDoubleRight, FaAngleDoubleLeft } from "react-icons/fa";
+
+
+import { Navbar } from '../../components/navbar/Navbar';
+
 import "./contact.css";
 
 
@@ -51,6 +55,7 @@ export const ContactUs = () => {
 
   return (
     <>
+    <Navbar />
       <ToastContainer position="top-right" autoClose={3000} />
       <div className={`contact-wrapper ${showDetails ? "expanded" : ""}`}>
         <img className="ball" src={Ball} alt="Ball" />

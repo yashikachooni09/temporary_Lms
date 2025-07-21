@@ -134,6 +134,8 @@ import ProductCard from '../../components/bookCard/BookCard.jsx';
 import { addtostore } from '../../redux/productSlice.jsx';
 import { fetchProducts } from '../../networking/api.js';
 
+import { Navbar } from '../../components/navbar/Navbar';
+
 export const Books = () => {
   const LIMIT = 9;
   const dispatch = useDispatch();
@@ -220,6 +222,8 @@ export const Books = () => {
   });
 
   return (
+    <>
+    <Navbar />
     <Container className="mt-5">
       {/* === Filter Section === */}
       <div className="mb-4 p-3 border rounded shadow-sm bg-white">
@@ -326,5 +330,6 @@ export const Books = () => {
         </>
       )}
     </Container>
+    </>
   );
 };

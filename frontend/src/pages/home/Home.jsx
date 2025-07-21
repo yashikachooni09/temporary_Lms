@@ -12,6 +12,8 @@ import mbaIcon from '../../assets/eContent/mba.png';
 import bbaIcon from '../../assets/eContent/bba.png';
 import bcaIcon from '../../assets/eContent/bca.png';
 
+import { Navbar } from '../../components/navbar/Navbar';
+
 import "./home.css";
 
 export const Home = () => {
@@ -35,6 +37,8 @@ export const Home = () => {
   ];
 
   return (
+    <>
+    <Navbar />
     <div className="home-wrapper">
       <img className="home-ball" src={Ball} alt="Ball" />
 
@@ -45,8 +49,8 @@ export const Home = () => {
           <h2>MAIMT Library</h2>
           <p>Your academic resources, just one click away.</p>
           <div className="hero-buttons">
-            <Link to="/books">📚 Books</Link>
-            <Link to="/contact-us">💌 Contact Us</Link>
+            <Link to="/books">Books</Link>
+            <Link to="/contact-us">Contact Us</Link>
           </div>
         </section>
       </div>
@@ -70,5 +74,6 @@ export const Home = () => {
         </div>
       </section>
     </div>
+    </>
   );
 };
