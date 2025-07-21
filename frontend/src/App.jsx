@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
-import { StudentSignUp } from './pages/studentSignUp/StudentSignUp.jsx';
-import { StudentLogin } from './pages/studentLogin/StudentLogin.jsx';
+import { StudentSignUp } from './pages/studentDashboard/studentSignup/StudentSignup.jsx';
+import { StudentLogin } from './pages/studentDashboard/studentLogin/StudentLogin.jsx';
 import { AdminLogin } from './pages/adminDashboard/adminLogin/AdminLogin.jsx';
 import { Home } from './pages/home/Home.jsx';
 import { About } from './pages/about/About.jsx';
