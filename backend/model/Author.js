@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const authorSchema = new mongoose.Schema({
   authorId: {type : String , requires:true , unique:true},
-  name: { type: String, required: true, unique: true }
+  name: { type: String, required: true}
 });
 
 module.exports = mongoose.model("Author", authorSchema);
