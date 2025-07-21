@@ -25,6 +25,11 @@ exports.signup = async (req, res) => {
         email: user.email,
         course: user.course,
         semester: user.semester,
+        fatherName:user.fatherName,
+        address:user.address,
+        rollNumber:user.rollNumber,
+        batch:user.batch,
+        number:user.number,
         role: user.role
       }, success: true
     })
@@ -105,12 +110,17 @@ exports.login = async (req, res) => {
       message: "Login successful",
       token: generateToken(user),
       user: {
-        id: user._id,
+       id: user._id,
         userName: user.userName,
         email: user.email,
         course: user.course,
         semester: user.semester,
-        role: user.role,
+        fatherName:user.fatherName,
+        address:user.address,
+        rollNumber:user.rollNumber,
+        batch:user.batch,
+        number:user.number,
+        role: user.role
       },
       success: true,
     });

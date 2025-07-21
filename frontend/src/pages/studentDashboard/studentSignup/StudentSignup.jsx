@@ -320,7 +320,7 @@ export const StudentSignUp = () => {
                           type="text"
                           name="number"
                           placeholder="Enter mobile number"
-                          value={values.mobile}
+                          value={values.number}
                           onChange={handleChange}
                           onBlur={handleBlur}
                           isInvalid={touched.number && !!errors.number}

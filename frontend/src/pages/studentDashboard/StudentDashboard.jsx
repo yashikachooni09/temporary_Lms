@@ -1,65 +1,50 @@
-import { useState } from 'react';
-import { Container, Card, Button } from 'react-bootstrap';
-import {
-  FaBars, FaTimes, FaUser, FaBookReader, FaVideo, FaFileAlt, FaBell, FaSignOutAlt, FaHome,
-} from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+
+import { StudentSidebar } from './studentSidebarRoutes/StudentSidebar';
 
 import './studentDashboard.css';
 
 export const StudentDashboard = () => {
-  const [sidebarOpen, setSidebarOpen] = useState(true);
-  const navigate = useNavigate();
 
-  const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
+  const [showWelcome, setShowWelcome] = useState(false);
 
-  const handleNavigation = (path) => {
-    navigate(path);
-  };
+  useEffect(() => {
+    const justLoggedIn = sessionStorage.getItem("showWelcome");
+    if (justLoggedIn === "true") {
+      setShowWelcome(true);
+      sessionStorage.removeItem("showWelcome");
+    }
+  }, []);
+
 
   return (
-    <div className="student-dashboard">
-      {/* Sidebar */}
-      <div className={`sidebar ${sidebarOpen ? 'open' : 'collapsed'}`}>
-        <Button variant="link" onClick={toggleSidebar} className="toggle-btn">
-            {sidebarOpen ? <FaTimes /> : <FaBars />}
-          </Button>
-        <div className="sidebar-header">
-          <h5 className="mb-0">Student <br />Panel</h5>
-          
-        </div>
-        <ul className="sidebar-menu">
-          <li onClick={() => handleNavigation('/student-dashboard')}>
-            <FaHome /> <span>Dashboard</span>
-          </li>
-          <li onClick={() => handleNavigation('/student-profile')}>
-            <FaUser /> <span>My Profile</span>
-          </li>
-          <li onClick={() => handleNavigation('/student-books')}>
-            <FaBookReader /> <span>My Books</span>
-          </li>
-          <li onClick={() => handleNavigation('/student-econtent')}>
-            <FaVideo /> <span>E-Content</span>
-          </li>
-          <li onClick={() => handleNavigation('/student-results')}>
-            <FaFileAlt /> <span>Results</span>
-          </li>
-          <li onClick={() => handleNavigation('/student-notices')}>
-            <FaBell /> <span>Notices</span>
-          </li>
-          <li><FaSignOutAlt /> <span>Logout</span></li>
-        </ul>
-      </div>
+    <>
+      <div className="admin-dashboard">
+        <StudentSidebar />
 
-      {/* Main Content */}
-      <div className={`main-content ${sidebarOpen ? 'shrink' : 'expand'}`}>
-        <Container className="d-flex justify-content-center align-items-center" style={{ minHeight: '80vh' }}>
-          <Card className="p-4 shadow" style={{ maxWidth: '500px', width: '100%', textAlign: 'center' }}>
-            <h4>🎓 Welcome to Student Dashboard!</h4>
-            <p className="text-muted mt-2">You're now in your student dashboard.</p>
-          </Card>
-        </Container>
-      </div>
-    </div>
+        <div className="admin-main-content shrink">
+          <div className="admin-content-card">
+            <h4>🛠️ Welcome to Student Dashboard!</h4>
+            <p className="admin-text-muted">You're now in the student dashboard.</p>
+          </div>
+        </div>
+      </div >
+
+      {showWelcome && (
+        <div className="welcome-overlay">
+          <div className="welcome-popup">
+            <h2>👋 Welcome to Admin Panel</h2>
+            <p>
+              You now have full control to manage books, users, and monitor library activity.
+              Use the sidebar to navigate between sections.
+            </p>
+            <button className="thanks-btn" onClick={() => setShowWelcome(false)}>
+              Thank You
+            </button>
+          </div>
+        </div>
+      )
+      }
+    </>
   );
 };
