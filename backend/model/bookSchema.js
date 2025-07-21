@@ -14,7 +14,7 @@ const bookSchema = new mongoose.Schema({
 
   authors: [
     {
-      type: String, 
+       type: mongoose.Schema.Types.ObjectId,
       ref: "Author",
       required: true
     }
