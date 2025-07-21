@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const bookCopySchema = new mongoose.Schema({
   copyId: {
     type: String, 
-    required: true,
+   
     unique: true
   },
    bookId: {
@@ -22,10 +22,9 @@ const bookCopySchema = new mongoose.Schema({
 });
 bookCopySchema.pre("save",async function(next){
   if(!this.copyId){
-    const count=mongoose.model("BookCopy").countDocuments()
-    this.copyId=`CP_${1+count}`
+ this.copyId = `CP_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
   }
   next()
 })
 
-module.exports = mongoose,model("BookCopy",bookCopySchema);
+module.exports = mongoose.model("BookCopy",bookCopySchema);
