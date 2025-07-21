@@ -33,9 +33,9 @@ export const StudentDashboard = () => {
       {showWelcome && (
         <div className="welcome-overlay">
           <div className="welcome-popup">
-            <h2>👋 Welcome to Admin Panel</h2>
+            <h2>👋 Welcome to Student Panel</h2>
             <p>
-              You now have full control to manage books, users, and monitor library activity.
+              You can now view your dashboard, issue books, and more.
               Use the sidebar to navigate between sections.
             </p>
             <button className="thanks-btn" onClick={() => setShowWelcome(false)}>

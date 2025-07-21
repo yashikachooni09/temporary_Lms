@@ -127,6 +127,7 @@ export const StudentSignUp = () => {
                   localStorage.setItem("user", JSON.stringify(res.data.user));
 
                   toast.success(res.data.message);
+                  sessionStorage.setItem("showWelcome", "true");
                   navigate("/student-dashboard");
                   return;
                 } else {
