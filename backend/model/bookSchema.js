@@ -44,5 +44,12 @@ const bookSchema = new mongoose.Schema({
 
   image: String 
 });
+bookSchema.pre("save",async function(next){
+    if(!this.bookId){
+        const count=await mongoose.model("Book").countDocuments()
+        this.bookId=`BK_${1+count}`
+    }
+    next()
+})
 
 module.exports = mongoose.model("Book", bookSchema);
