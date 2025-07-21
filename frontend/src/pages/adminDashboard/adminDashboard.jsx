@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { AdminSidebar } from './sidebarRoutes/AdminSidebar';
+import { AdminSidebar } from './adminSidebarRoutes/AdminSidebar';
 
 import './adminDashboard.css';
 

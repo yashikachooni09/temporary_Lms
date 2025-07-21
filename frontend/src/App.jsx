@@ -1,40 +1,47 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
-import { StudentSignUp } from './pages/studentSignUp/StudentSignUp.jsx';
-import { StudentLogin } from './pages/studentLogin/StudentLogin.jsx';
-import { AdminLogin } from './pages/adminDashboard/adminLogin/AdminLogin.jsx';
-import { Home } from './pages/home/Home.jsx';
-import { About } from './pages/about/About.jsx';
-import { Rules } from './pages/rules/Rules.jsx';
-
-import { Books } from './pages/books/Books.jsx';
-import {BookDetail} from './pages/bookdetails/BookDetail.jsx';
-
-import { ContactUs } from './pages/contactUs/ContactUs.jsx'
-import { ForgotPassword } from './pages/forgotPassword/ForgotPassword.jsx';
-import { OtpVerify } from './pages/otpVerify/OtpVerify.jsx';
-import { ResetPassword } from './pages/resetPassword/ResetPassword.jsx';
-import { NotFound } from './pages/notFound/NotFound.jsx';
-
-import { AdminDashboard } from './pages/adminDashboard/adminDashboard.jsx';
-import { AdminProfile } from './pages/adminDashboard/sidebarRoutes/adminProfile/AdminProfile.jsx';
-import { NewAdmin } from './pages/adminDashboard/sidebarRoutes/newAdmin/NewAdmin.jsx';
-import { NewAdminLogin } from './pages/adminDashboard/sidebarRoutes/newAdmin/newAdminLogin/NewAdminLogin.jsx';
-import { ManageUsers } from './pages/adminDashboard/sidebarRoutes/manageUsers/ManageUsers.jsx';
-import { ManageBooks } from './pages/adminDashboard/sidebarRoutes/manageBooks/ManageBooks.jsx';
-import { AddNewBook } from './pages/adminDashboard/sidebarRoutes/manageBooks/addNewBook/AddNewBook.jsx';
-import { Reports } from './pages/adminDashboard/sidebarRoutes/reports/Reports.jsx';
-import { AdminLogout } from './pages/adminDashboard/sidebarRoutes/adminLogout/AdminLogout.jsx';
-
-
-
-import { StudentDashboard } from './pages/studentDashboard/StudentDashboard.jsx';
-
 
 import { Header } from './components/header/Header.jsx';
 import { Footer } from './components/footer/Footer.jsx';
 import { ScrollToTop } from './components/scrollToTop/ScrollToTop.jsx';
+
+import { StudentSignUp } from './pages/studentDashboard/studentSignup/StudentSignup.jsx';
+import { StudentLogin } from './pages/studentDashboard/studentLogin/StudentLogin.jsx';
+import { AdminLogin } from './pages/adminDashboard/adminLogin/AdminLogin.jsx';
+
+import { Home } from './pages/home/Home.jsx';
+import { About } from './pages/about/About.jsx';
+import { Rules } from './pages/rules/Rules.jsx';
+import { Books } from './pages/books/Books.jsx';
+import { ContactUs } from './pages/contactUs/ContactUs.jsx';
+
+import {BookDetail} from './pages/bookdetails/BookDetail.jsx';
+
+import { ForgotPassword } from './pages/forgotPassword/ForgotPassword.jsx';
+import { OtpVerify } from './pages/otpVerify/OtpVerify.jsx';
+import { ResetPassword } from './pages/resetPassword/ResetPassword.jsx';
+
+import { NotFound } from './pages/notFound/NotFound.jsx';
+
+
+
+import { AdminDashboard } from './pages/adminDashboard/adminDashboard.jsx';
+import { AdminProfile } from './pages/adminDashboard/adminSidebarRoutes/adminProfile/AdminProfile.jsx';
+import { NewAdmin } from './pages/adminDashboard/adminSidebarRoutes/newAdmin/NewAdmin.jsx';
+import { NewAdminLogin } from './pages/adminDashboard/adminSidebarRoutes/newAdmin/newAdminLogin/NewAdminLogin.jsx';
+import { ManageUsers } from './pages/adminDashboard/adminSidebarRoutes/manageUsers/ManageUsers.jsx';
+import { ManageBooks } from './pages/adminDashboard/adminSidebarRoutes/manageBooks/ManageBooks.jsx';
+import { AddNewBook } from './pages/adminDashboard/adminSidebarRoutes/manageBooks/addNewBook/AddNewBook.jsx';
+import { Reports } from './pages/adminDashboard/adminSidebarRoutes/reports/Reports.jsx';
+import { AdminLogout } from './pages/adminDashboard/adminSidebarRoutes/adminLogout/AdminLogout.jsx';
+
+
+
+import { StudentDashboard } from './pages/studentDashboard/StudentDashboard.jsx';
+import { StudentProfile } from './pages/studentDashboard/studentSidebarRoutes/studentProfile/StudentProfile.jsx';
+import { StudentLogout } from './pages/studentDashboard/studentSidebarRoutes/studentLogout/StudentLogout.jsx';
+
 
 import './App.css';
 
@@ -74,6 +81,8 @@ function App() {
           <Route path="/admin-logout" element={<AdminLogout />} />
 
           <Route path="/student-dashboard" element={<StudentDashboard />} />
+          <Route path="/student-profile" element={<StudentProfile />} />
+          <Route path="/student-logout" element={<StudentLogout />} />
 
           <Route path="*" element={<NotFound />} />
         </Routes>
