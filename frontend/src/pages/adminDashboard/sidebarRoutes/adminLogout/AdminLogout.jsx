@@ -1,6 +1,8 @@
-import { useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { AdminSidebar } from '../AdminSidebar';
+import { FaSignOutAlt } from 'react-icons/fa';
 
-import {AdminSidebar} from '../AdminSidebar';
+import './adminLogout.css';
 
 export const AdminLogout = () => {
   const navigate = useNavigate();
@@ -15,12 +17,13 @@ export const AdminLogout = () => {
     <div className="admin-dashboard">
       <AdminSidebar />
 
-      <div className="admin-main-content shrink">
-        <div className="admin-content-card">
-          <h4>🚪 Confirm Logout</h4>
-          <p className="admin-text-muted">Are you sure you want to log out from your admin session?</p>
-          <button className="submit-btn" style={{ marginTop: '25px', color:'white' }} onClick={handleLogout}>
-            YES, LOG ME OUT
+      <div className="admin-logout-main-content shrink">
+        <div className="admin-logout-content-card">
+          <h4>CONFIRM LOGOUT</h4>
+          <p className="admin-logout-text-muted">Are you sure you want to log out from your admin session?</p>
+          <FaSignOutAlt className='admin-logout-icon' /> <br />
+          <button className="admin-logout-btn" onClick={handleLogout}>
+            Yes, Log Me Out
           </button>
         </div>
       </div>

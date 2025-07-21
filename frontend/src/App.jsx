@@ -18,15 +18,15 @@ import { ResetPassword } from './pages/resetPassword/ResetPassword.jsx';
 import { NotFound } from './pages/notFound/NotFound.jsx';
 
 import { AdminDashboard } from './pages/adminDashboard/adminDashboard.jsx';
+import { AdminProfile } from './pages/adminDashboard/sidebarRoutes/adminProfile/AdminProfile.jsx';
 import { NewAdmin } from './pages/adminDashboard/sidebarRoutes/newAdmin/NewAdmin.jsx';
 import { NewAdminLogin } from './pages/adminDashboard/sidebarRoutes/newAdmin/newAdminLogin/NewAdminLogin.jsx';
 import { ManageUsers } from './pages/adminDashboard/sidebarRoutes/manageUsers/ManageUsers.jsx';
 import { ManageBooks } from './pages/adminDashboard/sidebarRoutes/manageBooks/ManageBooks.jsx';
+import { AddNewBook } from './pages/adminDashboard/sidebarRoutes/manageBooks/addNewBook/AddNewBook.jsx';
 import { Reports } from './pages/adminDashboard/sidebarRoutes/reports/Reports.jsx';
 import { AdminLogout } from './pages/adminDashboard/sidebarRoutes/adminLogout/AdminLogout.jsx';
 
-
-import { AddBooks } from './pages/adminDashboard/addBooks/AddBooks.jsx';
 
 
 import { StudentDashboard } from './pages/studentDashboard/StudentDashboard.jsx';
@@ -56,7 +56,7 @@ function App() {
           <Route path="/student-login" element={<StudentLogin />} />
           <Route path='/admin-login' element={<AdminLogin />} />
           <Route path="/student-signup" element={<StudentSignUp />} />
-          <Route path="/add-books" element={<AddBooks />} />
+      
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/verify-otp" element={<OtpVerify />} />
@@ -64,10 +64,12 @@ function App() {
 
 
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
+          <Route path="/admin-profile" element={<AdminProfile />} />
           <Route path="/new-admin" element={<NewAdmin />} />
           <Route path="/new-admin-login" element={<NewAdminLogin />} />
           <Route path="/manage-users" element={<ManageUsers />} />
           <Route path="/manage-books" element={<ManageBooks />} />
+          <Route path="/add-new-book" element={<AddNewBook />} />
           <Route path="/reports" element={<Reports />} />
           <Route path="/admin-logout" element={<AdminLogout />} />
 

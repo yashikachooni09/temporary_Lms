@@ -1,0 +1,36 @@
+.admin-manage-books-main-content {
+  flex: 1;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: margin-left 0.3s ease;
+  border-radius: 22px;
+  margin: 20px;
+  border: 1px solid #03045e;
+}
+
+.manage-books-buttons-section{
+    height: 80px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-book-btn {
+  background-color: #03045e;
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+  border: none;
+  border-radius: 0 11px;
+  padding: 11px 22px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.add-book-btn:hover {
+  background-color: #fca311;
+  transform: translateY(-6px);
+}
