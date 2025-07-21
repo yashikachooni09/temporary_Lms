@@ -1,6 +1,6 @@
 .login-screen {
   min-height: 100vh;
-  background-color: #f0f4ff;
+  background: linear-gradient(90deg, #f0f4ff, #fff5f9, #e8ffea);
   display: flex;
   align-items: center;
   justify-content: center;

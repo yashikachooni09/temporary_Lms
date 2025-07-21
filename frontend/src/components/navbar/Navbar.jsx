@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 
 import './navbar.css';
-import ProfileIcon from '../../assets/profileImg.png';
+import ProfileIcon from '../../assets/adminAvatar.jpg';
 
 export const Navbar = () => {
   const navigate = useNavigate();
