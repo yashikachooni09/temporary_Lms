@@ -72,7 +72,7 @@ exports.login = async (req, res) => {
 
     const isMatch = await bcrypt.compare(password, isAdminExist.password);
     if (!isMatch) {
-      return res.status(400).json({ message: "Incorrect password", success: false });
+      return res.status(400).json({ message: "Admin not found", success: false });
     }
 
     return res.status(200).json({

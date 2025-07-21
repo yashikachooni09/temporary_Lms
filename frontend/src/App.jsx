@@ -1,13 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
-
-import { Header } from './components/header/Header.jsx';
-import { Footer } from './components/footer/Footer.jsx';
-import { ScrollToTop } from './components/scrollToTop/ScrollToTop.jsx';
-
-import { StudentSignUp } from './pages/studentDashboard/studentSignup/StudentSignup.jsx';
-import { StudentLogin } from './pages/studentDashboard/studentLogin/StudentLogin.jsx';
+import { StudentSignUp } from './pages/studentSignUp/StudentSignUp.jsx';
+import { StudentLogin } from './pages/studentLogin/StudentLogin.jsx';
 import { AdminLogin } from './pages/adminDashboard/adminLogin/AdminLogin.jsx';
 
 import { Home } from './pages/home/Home.jsx';
