@@ -5,6 +5,7 @@ const dotenv=require("dotenv")
 const cors=require("cors")
 const authRoutes=require("./routes/authRoutes")
 const adminRoutes=require("./routes/adminRoutes")
+const bookRoutes=require("./routes/libraryRoutes")
 
 //load env var
 dotenv.config()
@@ -14,6 +15,7 @@ app.use(express.urlencoded({extended:true}))
 connectDb()
 app.use("/auth",authRoutes)
 app.use("/admin",adminRoutes)
+app.use("/library",bookRoutes)
 const port=process.env.PORT||3000
 app.listen(port,()=>{
     console.log(`Server running on http://localhost:${port}`)

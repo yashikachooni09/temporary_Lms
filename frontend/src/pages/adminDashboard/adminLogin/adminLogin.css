@@ -1,6 +1,6 @@
 .login-screen {
   min-height: 100vh;
-  background-color: #f0f4ff;
+  background: linear-gradient(90deg, #f0f4ff, #fff5f9, #e8ffea);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -10,12 +10,15 @@
 .login-container {
   max-width: 400px;
   margin: auto;
-  background-color: red;
+  background: rgba(255, 255, 255, 0.25) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
   border-radius: 0 22px !important;
-  box-shadow: 0px 0px 18px rgb(204, 204, 204);
 }
 
-.login-heading{
+.login-heading {
   color: #03045e;
 }
 
@@ -37,33 +40,33 @@
   transform: scale(0.93);
 }
 
-.login-forgot-password{
+.login-forgot-password {
   font-size: 12px;
   text-decoration: none !important;
   color: #03045e;
   font-weight: 600;
 }
 
-.login-forgot-password:hover{
+.login-forgot-password:hover {
   font-size: 11.8px;
 }
 
-.login-forgot-password:active{
+.login-forgot-password:active {
   font-size: 11.5px;
 }
 
-.signup-link{
+.signup-link {
   font-size: 14px !important;
   text-decoration: none !important;
   color: #03045e;
   font-weight: 600 !important;
 }
 
-.signup-link:hover{
+.signup-link:hover {
   color: #fca311 !important;
 }
 
 
 .Toastify__toast-container {
-  z-index: 10000 !important;
+  z-index: 999999999 !important;
 }

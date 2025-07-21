@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { Container, Form, Button, Card, ProgressBar } from 'react-bootstrap';
+import { Container, Form, Button, Card, ProgressBar, Row, Col } from 'react-bootstrap';
 
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -13,6 +13,8 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import axios from 'axios';
 
 import { AdminSidebar } from '../AdminSidebar';
+
+import './newAdmin.css';
 
 const validationSchema = Yup.object().shape({
   adminName: Yup.string()
@@ -78,7 +80,7 @@ export const NewAdmin = () => {
       <div className="admin-dashboard">
         <AdminSidebar />
 
-        <div className="admin-main-content shrink">
+        <div className="admin-signup-main-content shrink">
           <Container className="d-flex justify-content-center align-items-center h-100">
             <Card className="p-4 signup-container">
               <h5 className="text-center fw-bold mb-4 signup-heading">ADMIN SIGNUP</h5>
@@ -173,46 +175,58 @@ export const NewAdmin = () => {
                         <Form.Control.Feedback type="invalid">{errors.adminNo}</Form.Control.Feedback>
                       </Form.Group>
 
-                      <Form.Group className="mb-3 position-relative">
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control
-                          type={showPassword ? 'text' : 'password'}
-                          name="password"
-                          placeholder="Enter password"
-                          value={values.password}
-                          onChange={handlePasswordChange}
-                          onBlur={handleBlur}
-                          isInvalid={touched.password && !!errors.password}
-                        />
-                        {values.password && (
-                          <>
-                            <span className="password-toggle-icon" onClick={() => setShowPassword(!showPassword)}>
-                              {showPassword ? <FaEyeSlash /> : <FaEye />}
-                            </span>
-                            {renderStrengthBar()}
-                          </>
-                        )}
-                        <Form.Control.Feedback type="invalid">{errors.password}</Form.Control.Feedback>
-                      </Form.Group>
+                      <Row>
+                        <Col md={6}>
+                          <Form.Group className="mb-3 position-relative">
+                            <Form.Label>Password</Form.Label>
+                            <Form.Control
+                              type={showPassword ? 'text' : 'password'}
+                              name="password"
+                              placeholder="Enter password"
+                              value={values.password}
+                              onChange={handlePasswordChange}
+                              onBlur={handleBlur}
+                              isInvalid={touched.password && !!errors.password}
+                            />
+                            {values.password && (
+                              <>
+                                <span
+                                  className="password-toggle-icon"
+                                  onClick={() => setShowPassword(!showPassword)}
+                                >
+                                  {showPassword ? <FaEyeSlash /> : <FaEye />}
+                                </span>
+                                {renderStrengthBar()}
+                              </>
+                            )}
+                            <Form.Control.Feedback type="invalid">{errors.password}</Form.Control.Feedback>
+                          </Form.Group>
+                        </Col>
 
-                      <Form.Group className="mb-3 position-relative">
-                        <Form.Label>Confirm Password</Form.Label>
-                        <Form.Control
-                          type={showConfirmPassword ? 'text' : 'password'}
-                          name="confirmPassword"
-                          placeholder="Confirm password"
-                          value={values.confirmPassword}
-                          onChange={handleChange}
-                          onBlur={handleBlur}
-                          isInvalid={touched.confirmPassword && !!errors.confirmPassword}
-                        />
-                        {values.confirmPassword && (
-                          <span className="password-toggle-icon" onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
-                            {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
-                          </span>
-                        )}
-                        <Form.Control.Feedback type="invalid">{errors.confirmPassword}</Form.Control.Feedback>
-                      </Form.Group>
+                        <Col md={6}>
+                          <Form.Group className="mb-3 position-relative">
+                            <Form.Label>Confirm Password</Form.Label>
+                            <Form.Control
+                              type={showConfirmPassword ? 'text' : 'password'}
+                              name="confirmPassword"
+                              placeholder="Confirm password"
+                              value={values.confirmPassword}
+                              onChange={handleChange}
+                              onBlur={handleBlur}
+                              isInvalid={touched.confirmPassword && !!errors.confirmPassword}
+                            />
+                            {values.confirmPassword && (
+                              <span
+                                className="password-toggle-icon"
+                                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                              >
+                                {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+                              </span>
+                            )}
+                            <Form.Control.Feedback type="invalid">{errors.confirmPassword}</Form.Control.Feedback>
+                          </Form.Group>
+                        </Col>
+                      </Row>
 
                       <Button className="w-100 submit-btn" type="submit">REGISTER ADMIN</Button>
                     </Form>

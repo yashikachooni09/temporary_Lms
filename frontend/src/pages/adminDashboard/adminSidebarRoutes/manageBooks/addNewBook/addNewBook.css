@@ -1,15 +1,16 @@
-.add-book-screen {
-    min-height: 100vh;
-    background: linear-gradient(90deg, #f0f4ff 0%, #fff5f9 40%, #f0f4ff 65%, #e8ffea 95%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px 10px;
+.admin-add-new-book-main-content {
+  flex: 1;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  transition: margin-left 0.3s ease;
+  border-radius: 22px;
+  margin: 20px;
 }
 
 .add-book-container {
     width: 100% !important;
-    max-width: 500px !important;
+    max-width: 1000px !important;
     margin: 20px;
     background: rgba(255, 255, 255, 0.25) !important;
     backdrop-filter: blur(14px) !important;
@@ -22,6 +23,11 @@
 
 .add-book-heading {
     color: #03045e;
+}
+
+.add-new-book-section-heading{
+    color: #fca311;
+    text-align: center;
 }
 
 .form-data .form-control {

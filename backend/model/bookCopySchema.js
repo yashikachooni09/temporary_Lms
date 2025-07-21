@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
-const BookCopySchema = new mongoose.Schema({
+const bookCopySchema = new mongoose.Schema({
   copyId: {
     type: String, 
-    required: true,
+   
     unique: true
   },
    bookId: {
@@ -20,5 +20,11 @@ const BookCopySchema = new mongoose.Schema({
     required: true
   }
 });
+bookCopySchema.pre("save",async function(next){
+  if(!this.copyId){
+ this.copyId = `CP_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
+  }
+  next()
+})
 
-module.exports = mongoose,model("BookCopy",BookCopySchema);
+module.exports = mongoose.model("BookCopy",bookCopySchema);

@@ -13,7 +13,7 @@
   align-items: center;
   max-width: 1200px;
   margin: auto;
-  height: 60px;
+  height: 54px;
   width: 100%;
 }
 
@@ -71,21 +71,21 @@
 }
 
 .main-navbar-profile-img {
-  height: 24px;
-  width: 24px;
+  height: 31px;
+  width: 31px;
   border-radius: 50%;
+  border-bottom: 1.4px solid white;
+  transform: scale(0.96);
   transition: transform 0.3s ease;
 }
 
 .main-navbar-profile-img:hover {
-  transform: scale(1.05);
+  transform: scale(1.1);
 }
 
-
-
-
-
-
+.main-navbar-profile-img:active {
+  transform: scale(0.93);
+}
 
 .main-navbar-dropdown-menu {
   position: absolute;
@@ -118,7 +118,6 @@
   padding: 8px 10px;
   border-bottom: 1px solid #ddd;
   margin-bottom: 10px;
-  color: #03045E;
 }
 
 .main-navbar-dropdown-item {
