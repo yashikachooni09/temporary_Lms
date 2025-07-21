@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const BookCopySchema = new mongoose.Schema({
+const bookCopySchema = new mongoose.Schema({
   copyId: {
     type: String, 
     required: true,
@@ -20,5 +20,12 @@ const BookCopySchema = new mongoose.Schema({
     required: true
   }
 });
+bookCopySchema.pre("save",async function(next){
+  if(!this.copyId){
+    const count=mongoose.model("BookCopy").countDocuments()
+    this.copyId=`CP_${1+count}`
+  }
+  next()
+})
 
-module.exports = mongoose,model("BookCopy",BookCopySchema);
+module.exports = mongoose,model("BookCopy",bookCopySchema);
