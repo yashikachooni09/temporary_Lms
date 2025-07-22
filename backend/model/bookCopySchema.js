@@ -18,7 +18,8 @@ const bookCopySchema = new mongoose.Schema({
   addedOn: {
     type: String, 
     required: true
-  }
+  },
+ shelfLocation: { type: String, required: true } 
 });
 bookCopySchema.pre("save",async function(next){
   if(!this.copyId){

@@ -19,29 +19,39 @@ exports.addBooks = async (req, res) => {
       costOnBill,
       department,
       copyCount,
-      image,
+      shelfLocation
     } = req.body;
 
-    let author = await Author.findOne({ name: name.trim() });
+    // Case-insensitive search for author
+    const author = await Author.findOne({
+      name: { $regex: new RegExp(`^${name.trim()}$`, "i") }
+    });
+
+    let finalAuthor = author;
 
     if (!author) {
-      author = new Author({ name });
-      await author.save();
+      finalAuthor = new Author({ name: name.trim() });
+      await finalAuthor.save();
     }
 
-    let book = await Book.findOne({ title: title.trim() })
+    // Case-insensitive search for book title
+    let book = await Book.findOne({
+      title: { $regex: new RegExp(`^${title.trim()}$`, "i") }
+    });
 
     if (book) {
       for (let i = 0; i < copyCount; i++) {
         const bookCopy = new BookCopy({
           bookId: book._id,
           addedOn: entryDate,
+          shelfLocation,
+          copyId: `CP_${Date.now()}_${i}`
         });
         await bookCopy.save();
       }
 
       book.copyCount += copyCount;
-      await book.save()
+      await book.save();
 
       return res.status(200).json({
         message: "Book exists, added new copies",
@@ -50,10 +60,10 @@ exports.addBooks = async (req, res) => {
       });
     }
 
-    // New book
+    // Create new book
     book = new Book({
-      title,
-      authors: [author._id],
+      title: title.trim(),
+      authors: [finalAuthor._id],
       edition,
       volume,
       publisher,
@@ -66,17 +76,19 @@ exports.addBooks = async (req, res) => {
       costOnBill,
       department,
       copyCount,
-      image,
+      image: req.file ? req.file.filename : ""
     });
 
-    (await book.save())
+    await book.save();
 
     for (let i = 0; i < copyCount; i++) {
       const bookCopy = new BookCopy({
         bookId: book._id,
         addedOn: entryDate,
+        shelfLocation,
+        copyId: `CP_${Date.now()}_${i}`
       });
-      (await bookCopy.save())
+      await bookCopy.save();
     }
 
     return res.status(201).json({
