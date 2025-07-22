@@ -8,6 +8,11 @@ import {Header} from './components/header/Header.jsx';
 import {Footer} from './components/footer/Footer.jsx';
 import {ScrollToTop} from './components/scrollToTop/ScrollToTop.jsx';
 
+import { ForgotPassword } from './pages/forgotPassword/ForgotPassword.jsx';
+import { OtpVerify } from './pages/otpVerify/OtpVerify.jsx';
+import { ResetPassword } from './pages/resetPassword/ResetPassword.jsx';
+import { ChangePassword } from './components/changePassword/ChangePassword.jsx';
+
 
 // OPAC- Online Public Access Catalog
 
@@ -25,10 +30,6 @@ import { BookDetail } from './pages/bookdetails/BookDetail.jsx';
 import { StudentSignUp } from './pages/studentDashboard/studentSignup/StudentSignup.jsx';
 import { StudentLogin } from './pages/studentDashboard/studentLogin/StudentLogin.jsx';
 import { AdminLogin } from './pages/adminDashboard/adminLogin/AdminLogin.jsx';
-
-import { ForgotPassword } from './pages/forgotPassword/ForgotPassword.jsx';
-import { OtpVerify } from './pages/otpVerify/OtpVerify.jsx';
-import { ResetPassword } from './pages/resetPassword/ResetPassword.jsx';
 
 
 // ADMIN
@@ -97,6 +98,7 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/verify-otp" element={<OtpVerify />} />
           <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/change-password" element={<ChangePassword />} />
 
 
 

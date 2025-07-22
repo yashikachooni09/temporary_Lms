@@ -10,6 +10,15 @@ router.post ("/verify-email",authController.verifyEmail);
 router.post ("/verify-otp",authController.verifyOtp);
 router.post("/reset-password",authController.resetPassword);
 
+
+
+
+router.post('/change-password', authController.changePassword);
+
+
+
+
+
 // router.get("/student-dashboard",verifyToken,authController.studentPage)
 // router.get("/admin-dashboard",verifyToken,authController.adminDashboard)
 
