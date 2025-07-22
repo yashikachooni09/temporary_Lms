@@ -18,8 +18,8 @@ export const StudentSidebar = () => {
     const menuItems = [
         { path: '/student-dashboard', icon: <FaHome className="icon-md" />, label: 'Dashboard' },
         { path: '/student-profile', icon: <FaUser className="icon-md" />, label: 'My Profile' },
-        { path: '/my-books', icon: <FaBookReader className="icon-md" />, label: 'My Books' },
-        { path: '/notices', icon: <FaBell className="icon-md" />, label: 'Notices' },
+        { path: '/student-books', icon: <FaBookReader className="icon-md" />, label: 'My Books' },
+        { path: '/student-notices', icon: <FaBell className="icon-md" />, label: 'Notices' },
         { path: '/student-logout', icon: <FaSignOutAlt className="icon-md" />, label: 'Logout' },
     ];
 

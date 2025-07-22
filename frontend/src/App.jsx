@@ -54,6 +54,8 @@ import { AdminLogout } from './pages/adminDashboard/adminSidebarRoutes/adminLogo
 
 import { StudentDashboard } from './pages/studentDashboard/StudentDashboard.jsx';
 import { StudentProfile } from './pages/studentDashboard/studentSidebarRoutes/studentProfile/StudentProfile.jsx';
+import { StudentMyBooks } from './pages/studentDashboard/studentSidebarRoutes/studentMyBooks/StudentMyBooks.jsx';
+import { StudentNotices } from './pages/studentDashboard/studentSidebarRoutes/studentNotices/StudentNotices.jsx';
 import { StudentLogout } from './pages/studentDashboard/studentSidebarRoutes/studentLogout/StudentLogout.jsx';
 
 
@@ -119,6 +121,8 @@ function App() {
 
           <Route path="/student-dashboard" element={<StudentDashboard />} />
           <Route path="/student-profile" element={<StudentProfile />} />
+          <Route path="/student-books" element={<StudentMyBooks />} />
+          <Route path="/student-notices" element={<StudentNotices />} />
           <Route path="/student-logout" element={<StudentLogout />} />
 
 
