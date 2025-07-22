@@ -1,9 +1,15 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
-import { StudentSignUp } from './pages/studentSignUp/StudentSignUp.jsx';
-import { StudentLogin } from './pages/studentLogin/StudentLogin.jsx';
-import { AdminLogin } from './pages/adminDashboard/adminLogin/AdminLogin.jsx';
+
+// REUSABLE COMPONENTS
+
+import {Header} from './components/header/Header.jsx';
+import {Footer} from './components/footer/Footer.jsx';
+import {ScrollToTop} from './components/scrollToTop/ScrollToTop.jsx';
+
+
+// OPAC- Online Public Access Catalog
 
 import { Home } from './pages/home/Home.jsx';
 import { About } from './pages/about/About.jsx';
@@ -11,15 +17,21 @@ import { Rules } from './pages/rules/Rules.jsx';
 import { Books } from './pages/books/Books.jsx';
 import { ContactUs } from './pages/contactUs/ContactUs.jsx';
 
-import {BookDetail} from './pages/bookdetails/BookDetail.jsx';
+import { BookDetail } from './pages/bookdetails/BookDetail.jsx';
+
+
+// ACCOUNTS
+
+import { StudentSignUp } from './pages/studentDashboard/studentSignup/StudentSignup.jsx';
+import { StudentLogin } from './pages/studentDashboard/studentLogin/StudentLogin.jsx';
+import { AdminLogin } from './pages/adminDashboard/adminLogin/AdminLogin.jsx';
 
 import { ForgotPassword } from './pages/forgotPassword/ForgotPassword.jsx';
 import { OtpVerify } from './pages/otpVerify/OtpVerify.jsx';
 import { ResetPassword } from './pages/resetPassword/ResetPassword.jsx';
 
-import { NotFound } from './pages/notFound/NotFound.jsx';
 
-
+// ADMIN
 
 import { AdminDashboard } from './pages/adminDashboard/adminDashboard.jsx';
 import { AdminProfile } from './pages/adminDashboard/adminSidebarRoutes/adminProfile/AdminProfile.jsx';
@@ -33,9 +45,26 @@ import { AdminLogout } from './pages/adminDashboard/adminSidebarRoutes/adminLogo
 
 
 
+
+
+
+
+// USER
+
 import { StudentDashboard } from './pages/studentDashboard/StudentDashboard.jsx';
 import { StudentProfile } from './pages/studentDashboard/studentSidebarRoutes/studentProfile/StudentProfile.jsx';
 import { StudentLogout } from './pages/studentDashboard/studentSidebarRoutes/studentLogout/StudentLogout.jsx';
+
+
+
+
+
+
+
+// WRONG ROUTE
+
+import { NotFound } from './pages/notFound/NotFound.jsx';
+
 
 
 import './App.css';
@@ -47,22 +76,29 @@ function App() {
       <Router>
         <Header />
         <Routes>
+
           <Route path="/" element={<Home />} />
+
           <Route path="/home" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/rules" element={<Rules />} />
-
           <Route path="/books" element={<Books />} />
           <Route path="/book-details/:id" element={<BookDetail />} />
+          <Route path="/contact-us" element={<ContactUs />} />
+
+
 
           <Route path="/student-login" element={<StudentLogin />} />
-          <Route path='/admin-login' element={<AdminLogin />} />
           <Route path="/student-signup" element={<StudentSignUp />} />
-      
-          <Route path="/contact-us" element={<ContactUs />} />
+          <Route path='/admin-login' element={<AdminLogin />} />
+
+
+
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/verify-otp" element={<OtpVerify />} />
           <Route path="/reset-password" element={<ResetPassword />} />
+
+
 
 
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
@@ -75,11 +111,18 @@ function App() {
           <Route path="/reports" element={<Reports />} />
           <Route path="/admin-logout" element={<AdminLogout />} />
 
+
+
+
+
           <Route path="/student-dashboard" element={<StudentDashboard />} />
           <Route path="/student-profile" element={<StudentProfile />} />
           <Route path="/student-logout" element={<StudentLogout />} />
 
+
+
           <Route path="*" element={<NotFound />} />
+
         </Routes>
         <Footer />
         <ScrollToTop />
