@@ -2,6 +2,19 @@ import { useEffect, useState } from 'react';
 
 import { AdminSidebar } from './adminSidebarRoutes/AdminSidebar';
 
+import { Bar, Pie } from 'react-chartjs-2';
+import {
+  Chart as ChartJS,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+  ArcElement,
+  Tooltip,
+  Legend
+} from 'chart.js';
+
+ChartJS.register(CategoryScale, LinearScale, BarElement, ArcElement, Tooltip, Legend);
+
 import './adminDashboard.css';
 
 export const AdminDashboard = () => {
@@ -17,15 +30,71 @@ export const AdminDashboard = () => {
   }, []);
 
 
+  const cardData = [
+    { title: 'Total Books', value: 1240, color: '#03045e' },
+    { title: 'Issued Books', value: 520, color: '#03045e' },
+    { title: 'Returned Books', value: 470, color: '#03045e' },
+    { title: 'Overdue Books', value: 75, color: '#03045e' },
+  ];
+
+  const barData = {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'],
+    datasets: [
+      {
+        label: 'Books Issued',
+        data: [120, 90, 140, 100, 160, 130, 110],
+        backgroundColor: '#03045e',
+        borderRadius: 6,
+      },
+      {
+        label: 'Books Returned',
+        data: [100, 70, 130, 90, 150, 120, 100],
+        backgroundColor: '#fca311',
+        borderRadius: 6,
+      },
+    ],
+  };
+
+  const pieData = {
+    labels: ['Issued', 'Returned', 'Available'],
+    datasets: [
+      {
+        data: [520, 470, 250],
+        backgroundColor: ['#03045e', '#fca311', '#d5e0ffff'],
+        borderWidth: 1,
+      },
+    ],
+  };
+
+
   return (
     <>
       <div className="admin-dashboard">
         <AdminSidebar />
 
-        <div className="admin-main-content shrink">
-          <div className="admin-content-card">
-            <h4>🛠️ Welcome to Admin Dashboard!</h4>
-            <p className="admin-text-muted">You're now in the admin dashboard.</p>
+        <div className="admin-dashboard-main-content shrink">
+          <div className="admin-dashboard-wrapper">
+
+            <div className="card-container">
+              {cardData.map((card, index) => (
+                <div className="dashboard-card" key={index} /*style={{ backgroundColor: card.color }}*/>
+                  <h4>{card.title}</h4>
+                  <p>{card.value}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="chart-container">
+              <div className="bar-chart-section">
+                <h4>Monthly Transactions</h4>
+                <Bar data={barData} />
+              </div>
+
+              <div className="pie-chart-section">
+                <h4>Book Status Overview</h4>
+                <Pie data={pieData} />
+              </div>
+            </div>
           </div>
         </div>
       </div >
