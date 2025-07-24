@@ -1,55 +1,38 @@
+
+
 const mongoose = require("mongoose");
 
 const bookSchema = new mongoose.Schema({
-  bookId: {
+  accessionNo: { type: Number, required: true, unique: true },//auto-generated
+
+  title: { type: String, required: true },
+  author: { type: String, required: true },
+  edition: { type: String },
+  publisher: { type: String },
+  yearOfPublication: { type: String },
+
+  department: { type: String, required: true }, 
+  course: { type: String, required: true },    
+
+  cost: { type: Number, required: true },
+  pages:{type:Number},
+  isbn: { type: String }, 
+  vendorName: { type: String },
+  billNo: { type: String },
+  billDate: { type: String },
+
+  entryDate: { type: String, required: true },
+
+  rackNo: { type: String, required: true },
+  shelfNo: { type: String, required: true },
+
+  status: {
     type: String,
-  
-    unique: true
+    enum: ["available", "issued", "damaged", "lost"],
+    default: "available"
   },
 
-  title: {
-    type: String,
-    required: true
-  },
-
-  authors: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Author",
-      required: true
-    }
-  ],
-
-  edition: String,
-  volume: String,
-  publisher: String,
-  publishedYear: String, 
-  pages: Number,   
-
-  entryDate: {
-    type: String,
-    required: true
-  },
-
-  billNumber: String,
-  billDate: String, 
-  vendorName: String,
-  costOnBill: Number, 
-
-  department: String, 
-  copyCount: {
-    type: Number,
-    default: 0
-  },
-
-  image: String 
+  addedBy: { type: String }
 });
-bookSchema.pre("save",async function(next){
-    if(!this.bookId){
-        const count=await mongoose.model("Book").countDocuments()
-        this.bookId=`BK_${1+count}`
-    }
-    next()
-})
 
 module.exports = mongoose.model("Book", bookSchema);
