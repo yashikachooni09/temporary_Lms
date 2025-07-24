@@ -4,13 +4,12 @@ const accessionSchema = new mongoose.Schema({
   department: {
     type: String,
     required: true,
-    unique: true, // One entry per department
   },
-  startRange: {
-    type: Number,
+  title: {
+    type: String,
     required: true,
   },
-  endRange: {
+  startRange: {
     type: Number,
     required: true,
   },
@@ -20,4 +19,6 @@ const accessionSchema = new mongoose.Schema({
   }
 });
 
-module.exports = mongoose.model("AccessionNumber", accessionSchema);
+
+
+module.exports = mongoose.model("AccessionTracker", accessionSchema);

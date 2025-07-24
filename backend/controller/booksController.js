@@ -1,158 +1,94 @@
-// const Author = require("../model/Author");
-// const Book = require("../model/bookSchema");
-// const BookCopy = require("../model/bookCopySchema");
+const AccessionTracker = require("../models/accessionTrackerSchema");
+const Book = require("../models/bookSchema");
 
-// exports.addBooks = async (req, res) => {
-//   try {
-//     const {
-//       name,
-//       title,
-//       edition,
-//       volume,
-//       publisher,
-//       publishedYear,
-//       pages,
-//       entryDate,
-//       billNumber,
-//       billDate,
-//       vendorName,
-//       costOnBill,
-//       department,
-//       copyCount,
-//       shelfLocation
-//     } = req.body;
-
-//     // Case-insensitive search for author
-//     const author = await Author.findOne({
-//       name: { $regex: new RegExp(`^${name.trim()}$`, "i") }
-//     });
-
-//     let finalAuthor = author;
-
-//     if (!author) {
-//       finalAuthor = new Author({ name: name.trim() });
-//       await finalAuthor.save();
-//     }
-
-//     // Case-insensitive search for book title
-//     let book = await Book.findOne({
-//       title: { $regex: new RegExp(`^${title.trim()}$`, "i") }
-//     });
-
-//     if (book) {
-//       for (let i = 0; i < copyCount; i++) {
-//         const bookCopy = new BookCopy({
-//           bookId: book._id,
-//           addedOn: entryDate,
-//           shelfLocation,
-//           copyId: `CP_${Date.now()}_${i}`
-//         });
-//         await bookCopy.save();
-//       }
-
-//       book.copyCount += copyCount;
-//       await book.save();
-
-//       return res.status(200).json({
-//         message: "Book exists, added new copies",
-//         book,
-//         success: true,
-//       });
-//     }
-
-//     // Create new book
-//     book = new Book({
-//       title: title.trim(),
-//       authors: [finalAuthor._id],
-//       edition,
-//       volume,
-//       publisher,
-//       publishedYear,
-//       pages,
-//       entryDate,
-//       billNumber,
-//       billDate,
-//       vendorName,
-//       costOnBill,
-//       department,
-//       copyCount,
-//       image: req.file ? req.file.filename : ""
-//     });
-
-//     await book.save();
-
-//     for (let i = 0; i < copyCount; i++) {
-//       const bookCopy = new BookCopy({
-//         bookId: book._id,
-//         addedOn: entryDate,
-//         shelfLocation,
-//         copyId: `CP_${Date.now()}_${i}`
-//       });
-//       await bookCopy.save();
-//     }
-
-//     return res.status(201).json({
-//       message: "New Book + Copies added",
-//       book,
-//       success: true,
-//     });
-//   } catch (err) {
-//     console.error("Error in addBooks:", err);
-//     return res.status(400).json({ error: err.message, success: false });
-//   }
-// };
-
-const Author = require("../model/Author");
-const Book = require("../model/bookSchema");
-const BookCopy = require("../model/bookCopySchema");
-const BookHistory = require('../model/bookHistory');
-
-exports.addBooks = async (req, res) => {
+const addBook = async (req, res) => {
   try {
     const {
       title,
-      authors,
+      department,
+      startRangeFromFrontend, // only required if tracker not exists
+
+      author,
       edition,
-      volume,
       publisher,
       yearOfPublication,
-      entryDate,
+      course,
+      cost,
+      pages,
+      isbn,
+
+      vendorName,
       billNo,
       billDate,
-      vendorName,
-      costOnBill,
-      pages,
-      department,
-      numberOfCopies,
-      bookImage,
+      entryDate,
+
+      rackNo,
+      shelfNo,
+    
+      addedBy
     } = req.body;
 
-    // Validate Required Fields
-    if (
-      !title || 
-      !authors || 
-      !Array.isArray(authors) || authors.length === 0 ||
-      !edition || 
-      !publisher || 
-      !yearOfPublication || 
-      !costOnBill || 
-      !numberOfCopies
-    ) {
-      return res.status(400).json({ message: "Required fields are missing or invalid" });
-    }
+    let tracker = await AccessionTracker.findOne({ department, title });
 
-    //  Check if Authors exist or create new ones
-    const authorIds = [];
-    for (const authorName of authors) {
-      let author = await Author.findOne({ name: authorName });
-      if (!author) {
-        author = await Author.create({ name: authorName });
+    let accessionNo;
+
+    if (!tracker) {
+      if (!startRangeFromFrontend) {
+        return res.status(400).json({
+          error: "Tracker not found for this department and title. Please provide startRangeFromFrontend."
+        });
       }
-      authorIds.push(author._id);
+
+      accessionNo = startRangeFromFrontend;
+
+      tracker = await AccessionTracker.create({
+        department,
+        title,
+        startRange: accessionNo,
+        current: accessionNo
+      });
+    } else {
+      accessionNo = tracker.current + 1;
+      tracker.current = accessionNo;
+      await tracker.save();
     }
 
-  } catch (error) {
-    console.error("Error in addBooks:", error);
-    res.status(500).json({ message: "Internal server error" });
+    const newBook = new Book({
+      accessionNo,
+      title,
+      author,
+      edition,
+      publisher,
+      yearOfPublication,
+
+      department,
+      course,
+
+      cost,
+      pages,
+      isbn,
+
+      vendorName,
+      billNo,
+      billDate,
+      entryDate,
+
+      rackNo,
+      shelfNo,
+     
+    });
+
+    await newBook.save();
+
+    res.status(201).json({
+      message: "Book added successfully",
+      accessionNo
+    });
+
+  } catch (err) {
+    console.error("Add book error:", err);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 };
+
+module.exports = { addBook };
