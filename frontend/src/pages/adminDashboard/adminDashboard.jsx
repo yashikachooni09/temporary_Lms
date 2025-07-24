@@ -15,6 +15,9 @@ import {
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, ArcElement, Tooltip, Legend);
 
+
+import { AdminLogoutButton } from '../../components/adminLogoutButton/AdminLogoutButton';
+
 import './adminDashboard.css';
 
 export const AdminDashboard = () => {
@@ -73,6 +76,8 @@ export const AdminDashboard = () => {
         <AdminSidebar />
 
         <div className="admin-dashboard-main-content shrink">
+          <AdminLogoutButton />
+
           <div className="admin-dashboard-wrapper">
 
             <div className="card-container">
@@ -108,7 +113,7 @@ export const AdminDashboard = () => {
               Use the sidebar to navigate between sections.
             </p>
             <button className="thanks-btn" onClick={() => setShowWelcome(false)}>
-              Thank You
+              Okay
             </button>
           </div>
         </div>

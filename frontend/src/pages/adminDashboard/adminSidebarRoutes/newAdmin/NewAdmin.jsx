@@ -14,6 +14,8 @@ import axios from 'axios';
 
 import { AdminSidebar } from '../AdminSidebar';
 
+import { AdminLogoutButton } from '../../../../components/adminLogoutButton/AdminLogoutButton';
+
 import './newAdmin.css';
 
 const validationSchema = Yup.object().shape({
@@ -81,6 +83,7 @@ export const NewAdmin = () => {
         <AdminSidebar />
 
         <div className="admin-signup-main-content shrink">
+          <AdminLogoutButton />
           <Container className="d-flex justify-content-center align-items-center h-100">
             <Card className="p-4 signup-container">
               <h5 className="text-center fw-bold mb-4 signup-heading">ADMIN SIGNUP</h5>

@@ -28,24 +28,33 @@
   gap: 20px;
 }
 
-/* Rule Card */
+
 .rule-item {
   display: flex;
   align-items: center;
   max-width: 700px;
   width: 100%;
   gap: 50px;
-  background: rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
   padding: 18px 20px;
   border-radius: 0 22px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .rule-item:hover {
-  transform: translateY(-4px);
+  transform: translate(-6px);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  background-color: #03045e;
+  .rule-icon{
+    color: #fca311;
+  }
+  .rule-text{
+    color: white;
+  }
 }
 
 .rule-icon {
@@ -56,23 +65,7 @@
 
 .rule-text {
   font-size: 1.05rem;
-  color: #222;
+  color: black;
   font-weight: 500;
   line-height: 1.5;
-}
-
-/* Responsive */
-@media (max-width: 600px) {
-  .rules-title {
-    font-size: 2.2rem;
-  }
-
-  .rule-item {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .rule-icon {
-    font-size: 1.4rem;
-  }
 }

@@ -1,16 +1,8 @@
-import "./rules.css";
-import {
-  FaBookDead,
-  FaBan,
-  FaBellSlash,
-  FaMobileAlt,
-  FaUserClock,
-  FaIdBadge,
-  FaChair,
-  FaClock,
-} from "react-icons/fa";
-
 import { Navbar } from '../../components/navbar/Navbar';
+
+import { FaBookDead, FaBan, FaBellSlash, FaMobileAlt, FaUserClock, FaIdBadge, FaChair, FaClock } from "react-icons/fa";
+
+import "./rules.css";
 
 export const Rules = () => {
   const rules = [
@@ -50,22 +42,22 @@ export const Rules = () => {
 
   return (
     <>
-    <Navbar />
-    <div className="rules-page">
-      <h1 className="rules-title">📜 Library Rules & Regulations</h1>
-      <p className="rules-subtitle">
-        Please follow these guidelines to ensure a peaceful and productive library environment.
-      </p>
+      <Navbar />
+      <div className="rules-page">
+        <h1 className="rules-title">📜 Library Rules & Regulations</h1>
+        <p className="rules-subtitle">
+          Please follow these guidelines to ensure a peaceful and productive library environment.
+        </p>
 
-      <div className="rules-list">
-        {rules.map((rule, index) => (
-          <div className="rule-item" key={index}>
-            <span className="rule-icon">{rule.icon}</span>
-            <span className="rule-text">{rule.text}</span>
-          </div>
-        ))}
+        <div className="rules-list">
+          {rules.map((rule, index) => (
+            <div className="rule-item" key={index}>
+              <span className="rule-icon">{rule.icon}</span>
+              <span className="rule-text">{rule.text}</span>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
     </>
   );
 };

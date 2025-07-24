@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { AdminSidebar } from '../AdminSidebar';
 import AdminAvatar from '../../../../assets/adminAvatar.jpg';
 
+import { AdminLogoutButton } from '../../../../components/adminLogoutButton/AdminLogoutButton';
+
 import './adminProfile.css';
 
 export const AdminProfile = () => {
@@ -14,6 +16,7 @@ export const AdminProfile = () => {
       <AdminSidebar />
 
       <div className="admin-profile-main-content shrink">
+        <AdminLogoutButton />
         <div className="admin-profile-card">
           <div className="admin-profile-left">
             <h4 className="admin-profile-name">{admin?.adminName || "Admin"}</h4>

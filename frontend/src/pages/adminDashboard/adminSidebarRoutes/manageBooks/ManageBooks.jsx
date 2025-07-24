@@ -1,8 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 
 import { AdminSidebar } from '../AdminSidebar';
+import '../../../../components/adminLogoutButton/AdminLogoutButton';
 
 import './manageBooks.css';
+import { AdminLogoutButton } from '../../../../components/adminLogoutButton/AdminLogoutButton';
 
 export const ManageBooks = () => {
   const navigate = useNavigate();
@@ -13,6 +15,7 @@ export const ManageBooks = () => {
         <AdminSidebar />
 
         <div className="admin-manage-books-main-content">
+          <AdminLogoutButton />
 
           <div className="manage-books-buttons-section">
             <button

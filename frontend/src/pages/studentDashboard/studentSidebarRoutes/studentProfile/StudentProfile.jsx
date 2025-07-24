@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { StudentSidebar } from '../StudentSidebar';
 import AdminAvatar from '../../../../assets/adminAvatar.jpg';
 
+import { StudentLogoutButton } from '../../../../components/studentLogoutButton/StudentLogoutButton';
+
 import './StudentProfile.css';
 
 export const StudentProfile = () => {
@@ -14,6 +16,7 @@ export const StudentProfile = () => {
       <StudentSidebar />
 
       <div className="student-profile-main-content shrink">
+        <StudentLogoutButton />
         <div className="student-profile-card">
           <div className="student-profile-left">
             <div className="student-detail-group">

@@ -60,18 +60,18 @@
 .visit-btn {
   display: inline-block;
   margin-top: 14px;
-  padding: 10px 16px;
+  padding: 9px 22px;
   background-color: #03045e;
   color: #fff;
   font-weight: 600;
   text-decoration: none;
-  border-radius: 0 14px;
-  transition: background 0.3s ease, transform 0.3s ease;
+  border-radius: 50px;
+  transition: background 0.3s ease, transform 0.6s ease;
 }
 
 .visit-btn:hover {
   background-color: #fca311;
-  transform: translateY(-3px);
+  transform: translateY(-6px);
 }
 
 .library-content {
@@ -86,15 +86,4 @@
 .library-desc {
   margin-top: 15px;
   color: #444;
-}
-
-@media (max-width: 768px) {
-  .maimt-layout {
-    flex-direction: column;
-  }
-
-  .maimt-right,
-  .maimt-left {
-    flex: 1 1 100%;
-  }
 }

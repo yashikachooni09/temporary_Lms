@@ -2,9 +2,7 @@ import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 
 
-// import BookShelf from '../../assets/bookShelf.png';
 import BooksTree from '../../assets/booksTree.png';
-
 import Ball from "../../assets/ball.png";
 
 import mcaIcon from '../../assets/eContent/mca.png';
@@ -49,8 +47,7 @@ export const Home = () => {
           <h2>MAIMT Library</h2>
           <p>Your academic resources, just one click away.</p>
           <div className="hero-buttons">
-            <Link to="/books">Books</Link>
-            <Link to="/contact-us">Contact Us</Link>
+            <Link to="/books">Search Books</Link>
           </div>
         </section>
       </div>

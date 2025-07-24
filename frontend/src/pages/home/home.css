@@ -18,15 +18,8 @@
   right: 60px;
   height: 444px;
   width: 444px;
-  /* opacity: 0; */
-  /* transform: scale(0.7); */
   transition: all 0.9s ease-in-out;
 }
-
-/* .home-image.animate {
-  opacity: 1;
-  transform: scale(1);
-} */
   
 
 .home-ball {
@@ -100,8 +93,8 @@
 .hero-buttons a {
   background: #03045e;
   color: #fff;
-  padding: 9px 12px;
-  border-radius: 0 15px;
+  padding: 9px 31px;
+  border-radius: 50px;
   text-decoration: none;
   font-weight: 600;
   transition: transform 0.6s ease, background 0.3s;

@@ -8,9 +8,9 @@ import {Header} from './components/header/Header.jsx';
 import {Footer} from './components/footer/Footer.jsx';
 import {ScrollToTop} from './components/scrollToTop/ScrollToTop.jsx';
 
-import { ForgotPassword } from './pages/forgotPassword/ForgotPassword.jsx';
-import { OtpVerify } from './pages/otpVerify/OtpVerify.jsx';
-import { ResetPassword } from './pages/resetPassword/ResetPassword.jsx';
+import { ForgotPassword } from './components/forgotPassword/ForgotPassword.jsx';
+import { OtpVerify } from './components/otpVerify/OtpVerify.jsx';
+import { ResetPassword } from './components/resetPassword/ResetPassword.jsx';
 import { ChangePassword } from './components/changePassword/ChangePassword.jsx';
 
 
@@ -21,8 +21,6 @@ import { About } from './pages/about/About.jsx';
 import { Rules } from './pages/rules/Rules.jsx';
 import { Books } from './pages/books/Books.jsx';
 import { ContactUs } from './pages/contactUs/ContactUs.jsx';
-
-import { BookDetail } from './pages/bookdetails/BookDetail.jsx';
 
 
 // ACCOUNTS
@@ -86,7 +84,6 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/rules" element={<Rules />} />
           <Route path="/books" element={<Books />} />
-          <Route path="/book-details/:id" element={<BookDetail />} />
           <Route path="/contact-us" element={<ContactUs />} />
 
 

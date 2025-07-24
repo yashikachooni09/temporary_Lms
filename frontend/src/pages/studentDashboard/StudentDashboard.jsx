@@ -66,6 +66,8 @@ import {
 
 import { StudentSidebar } from './studentSidebarRoutes/StudentSidebar';
 
+import { StudentLogoutButton } from '../../components/studentLogoutButton/StudentLogoutButton';
+
 // import './studentDashboard.css';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, ArcElement, Tooltip, Legend);
@@ -137,6 +139,7 @@ export const StudentDashboard = () => {
         <StudentSidebar />
 
         <div className="admin-main-content">
+          <StudentLogoutButton />
 
           <div className="card-container">
             {cardData.map((card, i) => (
@@ -170,7 +173,7 @@ export const StudentDashboard = () => {
               Use the sidebar to navigate between sections.
             </p>
             <button className="thanks-btn" onClick={() => setShowWelcome(false)}>
-              Thank You
+              Okay
             </button>
           </div>
         </div>
