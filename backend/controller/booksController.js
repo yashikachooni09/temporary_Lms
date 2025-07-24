@@ -1,58 +1,43 @@
-const AccessionTracker = require("../models/accessionTrackerSchema");
-const Book = require("../models/bookSchema");
+const Book = require("../models/Book");
+const AccessionNumber = require("../models/AccessionNumber");
 
-const addBook = async (req, res) => {
+exports.addBook = async (req, res) => {
   try {
     const {
       title,
-      department,
-      startRangeFromFrontend, // only required if tracker not exists
-
       author,
       edition,
       publisher,
       yearOfPublication,
+      department,
       course,
       cost,
       pages,
       isbn,
-
       vendorName,
       billNo,
       billDate,
       entryDate,
-
       rackNo,
       shelfNo,
-    
       addedBy
     } = req.body;
 
-    let tracker = await AccessionTracker.findOne({ department, title });
 
-    let accessionNo;
+    const tracker = await AccessionNumber.findOne({ title, department, course });
 
     if (!tracker) {
-      if (!startRangeFromFrontend) {
-        return res.status(400).json({
-          error: "Tracker not found for this department and title. Please provide startRangeFromFrontend."
-        });
-      }
-
-      accessionNo = startRangeFromFrontend;
-
-      tracker = await AccessionTracker.create({
-        department,
-        title,
-        startRange: accessionNo,
-        current: accessionNo
-      });
-    } else {
-      accessionNo = tracker.current + 1;
-      tracker.current = accessionNo;
-      await tracker.save();
+      return res.status(400).json({ error: "Accession tracker not found for this title/course/department" });
     }
 
+    if (tracker.current >= tracker.endRange) {
+      return res.status(400).json({ error: "Accession number range full. Contact admin." });
+    }
+
+    
+    const accessionNo = tracker.current + 1;
+
+    
     const newBook = new Book({
       accessionNo,
       title,
@@ -60,35 +45,34 @@ const addBook = async (req, res) => {
       edition,
       publisher,
       yearOfPublication,
-
       department,
       course,
-
       cost,
       pages,
       isbn,
-
       vendorName,
       billNo,
       billDate,
       entryDate,
-
       rackNo,
       shelfNo,
-     
+      addedBy,
+      status: "available"
     });
 
     await newBook.save();
+
+    // 5️⃣ Update tracker
+    tracker.current = accessionNo;
+    await tracker.save();
 
     res.status(201).json({
       message: "Book added successfully",
       accessionNo
     });
 
-  } catch (err) {
-    console.error("Add book error:", err);
+  } catch (error) {
+    console.error("Add Book Error:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
-
-module.exports = { addBook };
