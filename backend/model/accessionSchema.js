@@ -1,15 +1,9 @@
 const mongoose = require("mongoose");
 
-const accessionSchema = new mongoose.Schema({
-  department: { type: String, required: true },  // e.g. Computer
-  course: { type: String, required: true },      // e.g. MCA
-  title: { type: String, required: true },       // e.g. Java
-
+const accessionTrackerSchema = new mongoose.Schema({
+  course: { type: String, required: true, unique: true },
   startRange: { type: Number, required: true },
-  endRange: { type: Number, required: true },
-  current: { type: Number, required: true }
+  current: { type: Number, required: true },
 });
 
-
-
-module.exports = mongoose.model("AccessionNumber", accessionSchema);
+module.exports = mongoose.model("AccessionTracker", accessionTrackerSchema);

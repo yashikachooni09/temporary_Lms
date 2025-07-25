@@ -5,7 +5,7 @@ const dotenv=require("dotenv")
 const cors=require("cors")
 const authRoutes=require("./routes/authRoutes")
 const adminRoutes=require("./routes/adminRoutes")
-const bookRoutes=require("./routes/libraryRoutes")
+const bookRoutes=require("./routes/addBookRoutes")
 
 //load env var
 dotenv.config()
