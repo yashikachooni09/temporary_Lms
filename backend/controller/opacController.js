@@ -8,7 +8,8 @@ exports.searchBooks = async (req, res) => {
     if (title) query.title = { $regex: title, $options: "i" };
     if (author) query.author = { $regex: author, $options: "i" };
     if (course) query.course = course;
-    if (department) query.department = department;
+    if (department) query.department = department
+    
     if (year) query.year = parseInt(year);
     if (availableOnly) query.noOfBooks = { $gt: 0 };
     if (edition) query.edition = { $regex: edition, $options: 'i' };
