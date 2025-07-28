@@ -26,7 +26,6 @@ exports.issueBook=async (req,res)=>{
       return res.status(404).json({ message: "Student with this roll number not found." });
     }
 
-    // ✅ Optional: Max 3 book rule
    
 
     // 📅 Set issue and due date

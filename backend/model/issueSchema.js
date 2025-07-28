@@ -6,6 +6,7 @@ const issueSchema = new mongoose.Schema({
     required: true
   },
   user: {
+    
     type: String, 
     ref: "user",
     required: true
