@@ -20,6 +20,8 @@ app.use("/admin",adminRoutes)
 app.use("/library",bookRoutes)
 app.use("/opac",searchBooks)
 app.use("/issue",issueRoutes)
+app.use("/return",returnRoutes)
+const returnRoutes = require("./routes/returnRoutes")
 const port=process.env.PORT||3000
 app.listen(port,()=>{
     console.log(`Server running on http://localhost:${port}`)
