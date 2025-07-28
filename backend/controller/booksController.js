@@ -6,31 +6,44 @@ const AccessionTracker = require("../model/accessionSchema");
 
 exports.addBooks = async (req, res) => {
   try {
-    //  console.log("📦 Request Body:", req.body);
     const {
-      entryDate, 
-      bookName,// <-- ADD THIS
-      title, author, edition, volume,
-      publisher, year, pages, isbn,
-      department, course, cost,
-      rackNumber, shelfNo, place,
-      vendor, billNo, billDate,
-      noOfBooks // <-- USE this instead of "copies"
-    } = req.body;
-
-    // ✅ Step 1: Save book
-    const book = new Book({
-      entryDate,bookName, title, author, edition, volume,
+      entryDate, bookName, title, author, edition, volume,
       publisher, year, pages, isbn,
       department, course, cost,
       rackNumber, shelfNo, place,
       vendor, billNo, billDate,
       noOfBooks
+    } = req.body;
+
+    // 🔍 Step 1: Try to find existing book
+    let book = await Book.findOne({
+      title: title.trim(),
+      author: author.trim(),
+      edition: edition.trim(),
+      publisher: publisher.trim()
     });
+
+    let isNewBook = false;
+
+    if (!book) {
+      // ✅ New Book - Create it
+      isNewBook = true;
+      book = new Book({
+        entryDate, bookName, title, author, edition, volume,
+        publisher, year, pages, isbn,
+        department, course, cost,
+        rackNumber, shelfNo, place,
+        vendor, billNo, billDate,
+        noOfBooks
+      });
+    } else {
+      // ✅ Existing Book - Just update number of copies
+      book.noOfBooks += parseInt(noOfBooks);
+    }
 
     const savedBook = await book.save();
 
-    // ✅ Step 2: Get/Create Accession Tracker
+    // ✅ Step 2: Accession Tracker
     let tracker = await AccessionTracker.findOne({ course });
 
     if (!tracker) {
@@ -41,7 +54,7 @@ exports.addBooks = async (req, res) => {
       });
     }
 
-    // ✅ Step 3: Create multiple Book Copies
+    // ✅ Step 3: Save Copies
     const copyPromises = [];
 
     for (let i = 0; i < noOfBooks; i++) {
@@ -60,9 +73,9 @@ exports.addBooks = async (req, res) => {
     await Promise.all(copyPromises);
     await tracker.save();
 
-    // ✅ Success Response
+    // ✅ Response
     res.status(201).json({
-      message: `${noOfBooks} copies added successfully`,
+      message: `${noOfBooks} copies ${isNewBook ? "added" : "updated"} successfully`,
       bookId: savedBook._id,
       fromAccession: tracker.current - noOfBooks + 1,
       toAccession: tracker.current
