@@ -9,6 +9,8 @@ const bookRoutes=require("./routes/addBookRoutes")
 const searchBooks = require("./routes/opacRoutes")
 const issueRoutes = require("./routes/issueRoutes")
 
+const returnRoutes = require("./routes/returnRoutes")
+
 //load env var
 dotenv.config()
 app.use(cors())
@@ -21,7 +23,7 @@ app.use("/library",bookRoutes)
 app.use("/opac",searchBooks)
 app.use("/issue",issueRoutes)
 app.use("/return",returnRoutes)
-const returnRoutes = require("./routes/returnRoutes")
+
 const port=process.env.PORT||3000
 app.listen(port,()=>{
     console.log(`Server running on http://localhost:${port}`)
