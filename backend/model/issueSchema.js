@@ -22,7 +22,7 @@ const issueSchema = new mongoose.Schema({
   returnDate: Date,
   status: {
     type: String,
-    enum: ["issued", "returned","overdue"],
+    enum: ["issued", "returned"],
     default: "issued"
   },fine:{type:Number,default:0}
 });
