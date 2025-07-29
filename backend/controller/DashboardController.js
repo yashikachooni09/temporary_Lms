@@ -7,7 +7,7 @@ exports.totalStats = async(req,res)=>
     const totalBooks = await Book.countDocuments();
     const issuedBooks = await issueBook.countDocuments({ status: 'issued' });
     const returnedBooks = await issueBook.countDocuments({ status: 'returned' });
-    const overdueBooks = await issueBook.countDocuments({ status: 'overdue' });
+    // const overdueBooks = await issueBook.countDocuments({ status: 'overdue' });
 
     res.json({ totalBooks, issuedBooks, returnedBooks, overdueBooks });
   } catch (error) {

@@ -11,6 +11,8 @@ const issueRoutes = require("./routes/issueRoutes")
 
 const returnRoutes = require("./routes/returnRoutes")
 
+const studentDashboard = require("./routes/studentDashboardRoute");
+
 //load env var
 dotenv.config()
 app.use(cors())
@@ -23,6 +25,7 @@ app.use("/library",bookRoutes)
 app.use("/opac",searchBooks)
 app.use("/issue",issueRoutes)
 app.use("/return",returnRoutes)
+app.use("/api",studentDashboard);
 
 const port=process.env.PORT||3000
 app.listen(port,()=>{
